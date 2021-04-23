@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <wizard
+            category="org.eclipse.xtext.projectwiz"
+            class="at.jku.bise.ecore.json.grammar.ui.XtextExecutableExtensionFactory:at.jku.bise.ecore.json.grammar.wizard.NewXtextProjectFromEcoreJsonGrammarWizard"
+            icon="icons/new_xproj.gif"
+            id="at.jku.bise.ecore.json.grammar.NewXtextProjectFromEcoreJsonGrammar"
+            name="Xtext Project From Ecore (Create Json Grammar)"
+            project="true">
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated JsonGrammar -->
+      <package
+            uri="http://at.jku.bise/jsongrammar/1.0"
+            class="jsongrammar.JsongrammarPackage"
+            genModel="mm/JsonGrammar.genmodel"/>
+   </extension>
+
+</plugin>
