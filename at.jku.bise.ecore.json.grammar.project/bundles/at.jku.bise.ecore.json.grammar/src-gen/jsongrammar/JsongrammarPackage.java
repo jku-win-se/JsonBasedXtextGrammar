@@ -67,13 +67,13 @@ public interface JsongrammarPackage extends EPackage {
 	int DETAILED_GRAMMAR = 0;
 
 	/**
-	 * The feature id for the '<em><b>Keys</b></em>' reference list.
+	 * The feature id for the '<em><b>Keywords</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DETAILED_GRAMMAR__KEYS = 0;
+	int DETAILED_GRAMMAR__KEYWORDS = 0;
 
 	/**
 	 * The feature id for the '<em><b>Curly Braces References</b></em>' reference list.
@@ -149,13 +149,13 @@ public interface JsongrammarPackage extends EPackage {
 	int JSON_GRAMMAR = 1;
 
 	/**
-	 * The feature id for the '<em><b>Detaile Grammars</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Detailed Grammar</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JSON_GRAMMAR__DETAILE_GRAMMARS = 0;
+	int JSON_GRAMMAR__DETAILED_GRAMMAR = 0;
 
 	/**
 	 * The feature id for the '<em><b>Ns URI</b></em>' attribute.
@@ -196,15 +196,15 @@ public interface JsongrammarPackage extends EPackage {
 	EClass getDetailedGrammar();
 
 	/**
-	 * Returns the meta object for the reference list '{@link jsongrammar.DetailedGrammar#getKeys <em>Keys</em>}'.
+	 * Returns the meta object for the reference list '{@link jsongrammar.DetailedGrammar#getKeywords <em>Keywords</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Keys</em>'.
-	 * @see jsongrammar.DetailedGrammar#getKeys()
+	 * @return the meta object for the reference list '<em>Keywords</em>'.
+	 * @see jsongrammar.DetailedGrammar#getKeywords()
 	 * @see #getDetailedGrammar()
 	 * @generated
 	 */
-	EReference getDetailedGrammar_Keys();
+	EReference getDetailedGrammar_Keywords();
 
 	/**
 	 * Returns the meta object for the reference list '{@link jsongrammar.DetailedGrammar#getCurlyBracesReferences <em>Curly Braces References</em>}'.
@@ -272,15 +272,15 @@ public interface JsongrammarPackage extends EPackage {
 	EClass getJsonGrammar();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link jsongrammar.JsonGrammar#getDetaileGrammars <em>Detaile Grammars</em>}'.
+	 * Returns the meta object for the containment reference '{@link jsongrammar.JsonGrammar#getDetailedGrammar <em>Detailed Grammar</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Detaile Grammars</em>'.
-	 * @see jsongrammar.JsonGrammar#getDetaileGrammars()
+	 * @return the meta object for the containment reference '<em>Detailed Grammar</em>'.
+	 * @see jsongrammar.JsonGrammar#getDetailedGrammar()
 	 * @see #getJsonGrammar()
 	 * @generated
 	 */
-	EReference getJsonGrammar_DetaileGrammars();
+	EReference getJsonGrammar_DetailedGrammar();
 
 	/**
 	 * Returns the meta object for the attribute '{@link jsongrammar.JsonGrammar#getNsURI <em>Ns URI</em>}'.
@@ -327,12 +327,12 @@ public interface JsongrammarPackage extends EPackage {
 		EClass DETAILED_GRAMMAR = eINSTANCE.getDetailedGrammar();
 
 		/**
-		 * The meta object literal for the '<em><b>Keys</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Keywords</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DETAILED_GRAMMAR__KEYS = eINSTANCE.getDetailedGrammar_Keys();
+		EReference DETAILED_GRAMMAR__KEYWORDS = eINSTANCE.getDetailedGrammar_Keywords();
 
 		/**
 		 * The meta object literal for the '<em><b>Curly Braces References</b></em>' reference list feature.
@@ -385,12 +385,12 @@ public interface JsongrammarPackage extends EPackage {
 		EClass JSON_GRAMMAR = eINSTANCE.getJsonGrammar();
 
 		/**
-		 * The meta object literal for the '<em><b>Detaile Grammars</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Detailed Grammar</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference JSON_GRAMMAR__DETAILE_GRAMMARS = eINSTANCE.getJsonGrammar_DetaileGrammars();
+		EReference JSON_GRAMMAR__DETAILED_GRAMMAR = eINSTANCE.getJsonGrammar_DetailedGrammar();
 
 		/**
 		 * The meta object literal for the '<em><b>Ns URI</b></em>' attribute feature.

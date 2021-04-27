@@ -44,7 +44,7 @@ public class Ecore2XtextJSONGrammarCreator {
       final Ecore2XtextConfiguration it = config.getEcore2Xtext();
       final XtextJsonGrammarProjectInfo xtextJsonGrammarProject = ((XtextJsonGrammarProjectInfo) config);
       this.detailedJsonGrammar = this.loadJsonGrammar(xtextJsonGrammarProject.getJsonGrammarFile(), 
-        config.getEcore2Xtext().getRootElementClass().eResource().getResourceSet()).getDetaileGrammars().get(0);
+        config.getEcore2Xtext().getRootElementClass().eResource().getResourceSet()).getDetailedGrammar();
       EcoreUtil.resolveAll(this.detailedJsonGrammar);
       UniqueNameUtil.clearUniqueNames(it.getDefaultEPackageInfo());
       StringConcatenation _builder = new StringConcatenation();

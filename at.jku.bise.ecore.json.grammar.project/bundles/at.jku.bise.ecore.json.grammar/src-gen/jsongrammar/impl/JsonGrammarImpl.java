@@ -2,25 +2,17 @@
  */
 package jsongrammar.impl;
 
-import java.util.Collection;
-
 import jsongrammar.DetailedGrammar;
 import jsongrammar.JsonGrammar;
 import jsongrammar.JsongrammarPackage;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,7 +22,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link jsongrammar.impl.JsonGrammarImpl#getDetaileGrammars <em>Detaile Grammars</em>}</li>
+ *   <li>{@link jsongrammar.impl.JsonGrammarImpl#getDetailedGrammar <em>Detailed Grammar</em>}</li>
  *   <li>{@link jsongrammar.impl.JsonGrammarImpl#getNsURI <em>Ns URI</em>}</li>
  * </ul>
  *
@@ -38,14 +30,14 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class JsonGrammarImpl extends MinimalEObjectImpl.Container implements JsonGrammar {
 	/**
-	 * The cached value of the '{@link #getDetaileGrammars() <em>Detaile Grammars</em>}' containment reference list.
+	 * The cached value of the '{@link #getDetailedGrammar() <em>Detailed Grammar</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDetaileGrammars()
+	 * @see #getDetailedGrammar()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<DetailedGrammar> detaileGrammars;
+	protected DetailedGrammar detailedGrammar;
 
 	/**
 	 * The default value of the '{@link #getNsURI() <em>Ns URI</em>}' attribute.
@@ -91,11 +83,42 @@ public class JsonGrammarImpl extends MinimalEObjectImpl.Container implements Jso
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<DetailedGrammar> getDetaileGrammars() {
-		if (detaileGrammars == null) {
-			detaileGrammars = new EObjectContainmentEList<DetailedGrammar>(DetailedGrammar.class, this, JsongrammarPackage.JSON_GRAMMAR__DETAILE_GRAMMARS);
+	public DetailedGrammar getDetailedGrammar() {
+		return detailedGrammar;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetDetailedGrammar(DetailedGrammar newDetailedGrammar, NotificationChain msgs) {
+		DetailedGrammar oldDetailedGrammar = detailedGrammar;
+		detailedGrammar = newDetailedGrammar;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, JsongrammarPackage.JSON_GRAMMAR__DETAILED_GRAMMAR, oldDetailedGrammar, newDetailedGrammar);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
-		return detaileGrammars;
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDetailedGrammar(DetailedGrammar newDetailedGrammar) {
+		if (newDetailedGrammar != detailedGrammar) {
+			NotificationChain msgs = null;
+			if (detailedGrammar != null)
+				msgs = ((InternalEObject)detailedGrammar).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - JsongrammarPackage.JSON_GRAMMAR__DETAILED_GRAMMAR, null, msgs);
+			if (newDetailedGrammar != null)
+				msgs = ((InternalEObject)newDetailedGrammar).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - JsongrammarPackage.JSON_GRAMMAR__DETAILED_GRAMMAR, null, msgs);
+			msgs = basicSetDetailedGrammar(newDetailedGrammar, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, JsongrammarPackage.JSON_GRAMMAR__DETAILED_GRAMMAR, newDetailedGrammar, newDetailedGrammar));
 	}
 
 	/**
@@ -127,8 +150,8 @@ public class JsonGrammarImpl extends MinimalEObjectImpl.Container implements Jso
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case JsongrammarPackage.JSON_GRAMMAR__DETAILE_GRAMMARS:
-				return ((InternalEList<?>)getDetaileGrammars()).basicRemove(otherEnd, msgs);
+			case JsongrammarPackage.JSON_GRAMMAR__DETAILED_GRAMMAR:
+				return basicSetDetailedGrammar(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -141,8 +164,8 @@ public class JsonGrammarImpl extends MinimalEObjectImpl.Container implements Jso
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case JsongrammarPackage.JSON_GRAMMAR__DETAILE_GRAMMARS:
-				return getDetaileGrammars();
+			case JsongrammarPackage.JSON_GRAMMAR__DETAILED_GRAMMAR:
+				return getDetailedGrammar();
 			case JsongrammarPackage.JSON_GRAMMAR__NS_URI:
 				return getNsURI();
 		}
@@ -158,9 +181,8 @@ public class JsonGrammarImpl extends MinimalEObjectImpl.Container implements Jso
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case JsongrammarPackage.JSON_GRAMMAR__DETAILE_GRAMMARS:
-				getDetaileGrammars().clear();
-				getDetaileGrammars().addAll((Collection<? extends DetailedGrammar>)newValue);
+			case JsongrammarPackage.JSON_GRAMMAR__DETAILED_GRAMMAR:
+				setDetailedGrammar((DetailedGrammar)newValue);
 				return;
 			case JsongrammarPackage.JSON_GRAMMAR__NS_URI:
 				setNsURI((String)newValue);
@@ -177,8 +199,8 @@ public class JsonGrammarImpl extends MinimalEObjectImpl.Container implements Jso
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case JsongrammarPackage.JSON_GRAMMAR__DETAILE_GRAMMARS:
-				getDetaileGrammars().clear();
+			case JsongrammarPackage.JSON_GRAMMAR__DETAILED_GRAMMAR:
+				setDetailedGrammar((DetailedGrammar)null);
 				return;
 			case JsongrammarPackage.JSON_GRAMMAR__NS_URI:
 				setNsURI(NS_URI_EDEFAULT);
@@ -195,8 +217,8 @@ public class JsonGrammarImpl extends MinimalEObjectImpl.Container implements Jso
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case JsongrammarPackage.JSON_GRAMMAR__DETAILE_GRAMMARS:
-				return detaileGrammars != null && !detaileGrammars.isEmpty();
+			case JsongrammarPackage.JSON_GRAMMAR__DETAILED_GRAMMAR:
+				return detailedGrammar != null;
 			case JsongrammarPackage.JSON_GRAMMAR__NS_URI:
 				return NS_URI_EDEFAULT == null ? nsURI != null : !NS_URI_EDEFAULT.equals(nsURI);
 		}

@@ -57,7 +57,7 @@ public class DetailedGrammarItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addKeysPropertyDescriptor(object);
+			addKeywordsPropertyDescriptor(object);
 			addCurlyBracesReferencesPropertyDescriptor(object);
 			addBracketsReferencesPropertyDescriptor(object);
 			addKeyValuePropertyDescriptor(object);
@@ -68,19 +68,19 @@ public class DetailedGrammarItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Keys feature.
+	 * This adds a property descriptor for the Keywords feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addKeysPropertyDescriptor(Object object) {
+	protected void addKeywordsPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_DetailedGrammar_keys_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_DetailedGrammar_keys_feature", "_UI_DetailedGrammar_type"),
-				 JsongrammarPackage.Literals.DETAILED_GRAMMAR__KEYS,
+				 getString("_UI_DetailedGrammar_keywords_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_DetailedGrammar_keywords_feature", "_UI_DetailedGrammar_type"),
+				 JsongrammarPackage.Literals.DETAILED_GRAMMAR__KEYWORDS,
 				 true,
 				 false,
 				 true,

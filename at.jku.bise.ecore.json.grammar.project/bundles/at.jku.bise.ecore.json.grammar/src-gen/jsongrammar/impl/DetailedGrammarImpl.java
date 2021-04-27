@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link jsongrammar.impl.DetailedGrammarImpl#getKeys <em>Keys</em>}</li>
+ *   <li>{@link jsongrammar.impl.DetailedGrammarImpl#getKeywords <em>Keywords</em>}</li>
  *   <li>{@link jsongrammar.impl.DetailedGrammarImpl#getCurlyBracesReferences <em>Curly Braces References</em>}</li>
  *   <li>{@link jsongrammar.impl.DetailedGrammarImpl#getBracketsReferences <em>Brackets References</em>}</li>
  *   <li>{@link jsongrammar.impl.DetailedGrammarImpl#getKeyValue <em>Key Value</em>}</li>
@@ -38,14 +38,14 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  */
 public class DetailedGrammarImpl extends MinimalEObjectImpl.Container implements DetailedGrammar {
 	/**
-	 * The cached value of the '{@link #getKeys() <em>Keys</em>}' reference list.
+	 * The cached value of the '{@link #getKeywords() <em>Keywords</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getKeys()
+	 * @see #getKeywords()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<EStructuralFeature> keys;
+	protected EList<EStructuralFeature> keywords;
 
 	/**
 	 * The cached value of the '{@link #getCurlyBracesReferences() <em>Curly Braces References</em>}' reference list.
@@ -121,11 +121,11 @@ public class DetailedGrammarImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<EStructuralFeature> getKeys() {
-		if (keys == null) {
-			keys = new EObjectResolvingEList<EStructuralFeature>(EStructuralFeature.class, this, JsongrammarPackage.DETAILED_GRAMMAR__KEYS);
+	public EList<EStructuralFeature> getKeywords() {
+		if (keywords == null) {
+			keywords = new EObjectResolvingEList<EStructuralFeature>(EStructuralFeature.class, this, JsongrammarPackage.DETAILED_GRAMMAR__KEYWORDS);
 		}
-		return keys;
+		return keywords;
 	}
 
 	/**
@@ -196,8 +196,8 @@ public class DetailedGrammarImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case JsongrammarPackage.DETAILED_GRAMMAR__KEYS:
-				return getKeys();
+			case JsongrammarPackage.DETAILED_GRAMMAR__KEYWORDS:
+				return getKeywords();
 			case JsongrammarPackage.DETAILED_GRAMMAR__CURLY_BRACES_REFERENCES:
 				return getCurlyBracesReferences();
 			case JsongrammarPackage.DETAILED_GRAMMAR__BRACKETS_REFERENCES:
@@ -221,9 +221,9 @@ public class DetailedGrammarImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case JsongrammarPackage.DETAILED_GRAMMAR__KEYS:
-				getKeys().clear();
-				getKeys().addAll((Collection<? extends EStructuralFeature>)newValue);
+			case JsongrammarPackage.DETAILED_GRAMMAR__KEYWORDS:
+				getKeywords().clear();
+				getKeywords().addAll((Collection<? extends EStructuralFeature>)newValue);
 				return;
 			case JsongrammarPackage.DETAILED_GRAMMAR__CURLY_BRACES_REFERENCES:
 				getCurlyBracesReferences().clear();
@@ -257,8 +257,8 @@ public class DetailedGrammarImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case JsongrammarPackage.DETAILED_GRAMMAR__KEYS:
-				getKeys().clear();
+			case JsongrammarPackage.DETAILED_GRAMMAR__KEYWORDS:
+				getKeywords().clear();
 				return;
 			case JsongrammarPackage.DETAILED_GRAMMAR__CURLY_BRACES_REFERENCES:
 				getCurlyBracesReferences().clear();
@@ -287,8 +287,8 @@ public class DetailedGrammarImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case JsongrammarPackage.DETAILED_GRAMMAR__KEYS:
-				return keys != null && !keys.isEmpty();
+			case JsongrammarPackage.DETAILED_GRAMMAR__KEYWORDS:
+				return keywords != null && !keywords.isEmpty();
 			case JsongrammarPackage.DETAILED_GRAMMAR__CURLY_BRACES_REFERENCES:
 				return curlyBracesReferences != null && !curlyBracesReferences.isEmpty();
 			case JsongrammarPackage.DETAILED_GRAMMAR__BRACKETS_REFERENCES:

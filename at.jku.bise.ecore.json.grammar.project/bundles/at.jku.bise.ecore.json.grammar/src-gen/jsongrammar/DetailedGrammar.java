@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link jsongrammar.DetailedGrammar#getKeys <em>Keys</em>}</li>
+ *   <li>{@link jsongrammar.DetailedGrammar#getKeywords <em>Keywords</em>}</li>
  *   <li>{@link jsongrammar.DetailedGrammar#getCurlyBracesReferences <em>Curly Braces References</em>}</li>
  *   <li>{@link jsongrammar.DetailedGrammar#getBracketsReferences <em>Brackets References</em>}</li>
  *   <li>{@link jsongrammar.DetailedGrammar#getKeyValue <em>Key Value</em>}</li>
@@ -33,16 +33,16 @@ import org.eclipse.emf.ecore.EStructuralFeature;
  */
 public interface DetailedGrammar extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Keys</b></em>' reference list.
+	 * Returns the value of the '<em><b>Keywords</b></em>' reference list.
 	 * The list contents are of type {@link org.eclipse.emf.ecore.EStructuralFeature}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Keys</em>' reference list.
-	 * @see jsongrammar.JsongrammarPackage#getDetailedGrammar_Keys()
+	 * @return the value of the '<em>Keywords</em>' reference list.
+	 * @see jsongrammar.JsongrammarPackage#getDetailedGrammar_Keywords()
 	 * @model
 	 * @generated
 	 */
-	EList<EStructuralFeature> getKeys();
+	EList<EStructuralFeature> getKeywords();
 
 	/**
 	 * Returns the value of the '<em><b>Curly Braces References</b></em>' reference list.

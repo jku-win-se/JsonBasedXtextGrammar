@@ -102,7 +102,7 @@ public class JsonGrammarItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(JsongrammarPackage.Literals.JSON_GRAMMAR__DETAILE_GRAMMARS);
+			childrenFeatures.add(JsongrammarPackage.Literals.JSON_GRAMMAR__DETAILED_GRAMMAR);
 		}
 		return childrenFeatures;
 	}
@@ -161,7 +161,7 @@ public class JsonGrammarItemProvider
 			case JsongrammarPackage.JSON_GRAMMAR__NS_URI:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case JsongrammarPackage.JSON_GRAMMAR__DETAILE_GRAMMARS:
+			case JsongrammarPackage.JSON_GRAMMAR__DETAILED_GRAMMAR:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -181,7 +181,7 @@ public class JsonGrammarItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(JsongrammarPackage.Literals.JSON_GRAMMAR__DETAILE_GRAMMARS,
+				(JsongrammarPackage.Literals.JSON_GRAMMAR__DETAILED_GRAMMAR,
 				 JsongrammarFactory.eINSTANCE.createDetailedGrammar()));
 	}
 

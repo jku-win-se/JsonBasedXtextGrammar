@@ -110,7 +110,7 @@ public class JsongrammarPackageImpl extends EPackageImpl implements JsongrammarP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDetailedGrammar_Keys() {
+	public EReference getDetailedGrammar_Keywords() {
 		return (EReference)detailedGrammarEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -173,7 +173,7 @@ public class JsongrammarPackageImpl extends EPackageImpl implements JsongrammarP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getJsonGrammar_DetaileGrammars() {
+	public EReference getJsonGrammar_DetailedGrammar() {
 		return (EReference)jsonGrammarEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -215,7 +215,7 @@ public class JsongrammarPackageImpl extends EPackageImpl implements JsongrammarP
 
 		// Create classes and their features
 		detailedGrammarEClass = createEClass(DETAILED_GRAMMAR);
-		createEReference(detailedGrammarEClass, DETAILED_GRAMMAR__KEYS);
+		createEReference(detailedGrammarEClass, DETAILED_GRAMMAR__KEYWORDS);
 		createEReference(detailedGrammarEClass, DETAILED_GRAMMAR__CURLY_BRACES_REFERENCES);
 		createEReference(detailedGrammarEClass, DETAILED_GRAMMAR__BRACKETS_REFERENCES);
 		createEReference(detailedGrammarEClass, DETAILED_GRAMMAR__KEY_VALUE);
@@ -223,7 +223,7 @@ public class JsongrammarPackageImpl extends EPackageImpl implements JsongrammarP
 		createEReference(detailedGrammarEClass, DETAILED_GRAMMAR__BRACKETS_ECLASS);
 
 		jsonGrammarEClass = createEClass(JSON_GRAMMAR);
-		createEReference(jsonGrammarEClass, JSON_GRAMMAR__DETAILE_GRAMMARS);
+		createEReference(jsonGrammarEClass, JSON_GRAMMAR__DETAILED_GRAMMAR);
 		createEAttribute(jsonGrammarEClass, JSON_GRAMMAR__NS_URI);
 	}
 
@@ -258,7 +258,7 @@ public class JsongrammarPackageImpl extends EPackageImpl implements JsongrammarP
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(detailedGrammarEClass, DetailedGrammar.class, "DetailedGrammar", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDetailedGrammar_Keys(), ecorePackage.getEStructuralFeature(), null, "keys", null, 0, -1, DetailedGrammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDetailedGrammar_Keywords(), ecorePackage.getEStructuralFeature(), null, "keywords", null, 0, -1, DetailedGrammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDetailedGrammar_CurlyBracesReferences(), ecorePackage.getEReference(), null, "curlyBracesReferences", null, 0, -1, DetailedGrammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDetailedGrammar_BracketsReferences(), ecorePackage.getEReference(), null, "bracketsReferences", null, 0, -1, DetailedGrammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDetailedGrammar_KeyValue(), ecorePackage.getEAttribute(), null, "keyValue", null, 0, -1, DetailedGrammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -266,7 +266,7 @@ public class JsongrammarPackageImpl extends EPackageImpl implements JsongrammarP
 		initEReference(getDetailedGrammar_BracketsEClass(), ecorePackage.getEClass(), null, "bracketsEClass", null, 0, -1, DetailedGrammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(jsonGrammarEClass, JsonGrammar.class, "JsonGrammar", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getJsonGrammar_DetaileGrammars(), this.getDetailedGrammar(), null, "detaileGrammars", null, 0, -1, JsonGrammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getJsonGrammar_DetailedGrammar(), this.getDetailedGrammar(), null, "detailedGrammar", null, 1, 1, JsonGrammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getJsonGrammar_NsURI(), ecorePackage.getEString(), "nsURI", null, 0, 1, JsonGrammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource

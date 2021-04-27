@@ -28,7 +28,7 @@ class Ecore2XtextJSONGrammarCreator {
 		val XtextJsonGrammarProjectInfo xtextJsonGrammarProject = config as XtextJsonGrammarProjectInfo;
 		this.detailedJsonGrammar = loadJsonGrammar(xtextJsonGrammarProject.jsonGrammarFile,
 				config.ecore2Xtext.rootElementClass.eResource.resourceSet
-		).detaileGrammars.get(0);
+		).detailedGrammar;
 		EcoreUtil.resolveAll(this.detailedJsonGrammar);
 		defaultEPackageInfo.clearUniqueNames
 		'''
