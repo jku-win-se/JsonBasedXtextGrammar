@@ -150,6 +150,12 @@ public class Ecore2XtextJSONGrammarCreator {
     CharSequence _assignmentKeywordJSON = this.assignmentKeywordJSON(it);
     _builder.append(_assignmentKeywordJSON);
     {
+      if ((it instanceof EReference)) {
+        CharSequence _openParenthesis = this.openParenthesis(((EReference)it));
+        _builder.append(_openParenthesis);
+      }
+    }
+    {
       boolean _isRequired = it.isRequired();
       boolean _not = (!_isRequired);
       if (_not) {
@@ -162,12 +168,6 @@ public class Ecore2XtextJSONGrammarCreator {
         {
           boolean _isContainment = Ecore2XtextExtensions.isContainment(it);
           if (_isContainment) {
-            {
-              if ((it instanceof EReference)) {
-                CharSequence _openParenthesis = this.openParenthesis(((EReference)it));
-                _builder.append(_openParenthesis);
-              }
-            }
           } else {
             _builder.append("\'(\' ");
           }

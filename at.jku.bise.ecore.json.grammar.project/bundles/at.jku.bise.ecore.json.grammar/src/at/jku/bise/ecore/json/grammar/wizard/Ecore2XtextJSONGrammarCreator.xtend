@@ -74,7 +74,7 @@ class Ecore2XtextJSONGrammarCreator {
 	
 	def assigment(EStructuralFeature it) {
 		'''	
-			«assignmentKeywordJSON(it)»«IF(!required)»(«ENDIF»«IF many»«IF containment»«IF it instanceof EReference»«it.openParenthesis»«ENDIF»«ELSE»'(' «ENDIF»«ENDIF»«name.quoteIfNeccesary»«assignmentOperator»«assignedTerminal»«IF many» ( "," «name.quoteIfNeccesary»«assignmentOperator»«assignedTerminal»)* «IF containment»«ELSE»')' «ENDIF»«ENDIF»«IF (!required)»)?«ENDIF»«IF it instanceof EReference»«it.closeParenthesis»«ENDIF»
+			«assignmentKeywordJSON(it)»«IF it instanceof EReference»«it.openParenthesis»«ENDIF»«IF(!required)»(«ENDIF»«IF many»«IF containment»«ELSE»'(' «ENDIF»«ENDIF»«name.quoteIfNeccesary»«assignmentOperator»«assignedTerminal»«IF many» ( "," «name.quoteIfNeccesary»«assignmentOperator»«assignedTerminal»)* «IF containment»«ELSE»')' «ENDIF»«ENDIF»«IF (!required)»)?«ENDIF»«IF it instanceof EReference»«it.closeParenthesis»«ENDIF»
 			«IF it instanceof EAttribute»
 				«IF it.isKeyValue»
 					«"'"»:«"'"»
