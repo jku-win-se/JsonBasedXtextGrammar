@@ -74,7 +74,7 @@ class Ecore2XtextJSONGrammarCreator {
 	
 	def assigment(EStructuralFeature it) {
 		'''	
-			«IF(!required)»(«ENDIF»«assignmentKeywordJSON(it)»«IF many»«IF containment»«IF it instanceof EReference»«it.openParenthesis»«ENDIF»«ELSE»'(' «ENDIF»«ENDIF»«name.quoteIfNeccesary»«assignmentOperator»«assignedTerminal»«IF many» ( "," «name.quoteIfNeccesary»«assignmentOperator»«assignedTerminal»)* «IF containment»«IF it instanceof EReference»«it.closeParenthesis»«ENDIF»«ELSE»')' «ENDIF»«ENDIF»«IF (!required)»)?«ENDIF»
+			«assignmentKeywordJSON(it)»«IF(!required)»(«ENDIF»«IF many»«IF containment»«IF it instanceof EReference»«it.openParenthesis»«ENDIF»«ELSE»'(' «ENDIF»«ENDIF»«name.quoteIfNeccesary»«assignmentOperator»«assignedTerminal»«IF many» ( "," «name.quoteIfNeccesary»«assignmentOperator»«assignedTerminal»)* «IF containment»«ELSE»')' «ENDIF»«ENDIF»«IF (!required)»)?«ENDIF»«IF it instanceof EReference»«it.closeParenthesis»«ENDIF»
 			«IF it instanceof EAttribute»
 				«IF it.isKeyValue»
 					«"'"»:«"'"»
@@ -82,6 +82,17 @@ class Ecore2XtextJSONGrammarCreator {
 			«ENDIF»
 		'''
 	}
+	
+//	def assigment(EStructuralFeature it) {
+//		'''	
+//			«IF(!required)»(«ENDIF»«assignmentKeywordJSON(it)»«IF many»«IF containment»«IF it instanceof EReference»«it.openParenthesis»«ENDIF»«ELSE»'(' «ENDIF»«ENDIF»«name.quoteIfNeccesary»«assignmentOperator»«assignedTerminal»«IF many» ( "," «name.quoteIfNeccesary»«assignmentOperator»«assignedTerminal»)* «IF containment»«IF it instanceof EReference»«it.closeParenthesis»«ENDIF»«ELSE»')' «ENDIF»«ENDIF»«IF (!required)»)?«ENDIF»
+//			«IF it instanceof EAttribute»
+//				«IF it.isKeyValue»
+//					«"'"»:«"'"»
+//				«ENDIF»
+//			«ENDIF»
+//		'''
+//	}
 		
 	def assignedTerminal(EStructuralFeature it) {
 		switch(it) {

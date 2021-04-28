@@ -147,6 +147,8 @@ public class Ecore2XtextJSONGrammarCreator {
   
   public CharSequence assigment(final EStructuralFeature it) {
     StringConcatenation _builder = new StringConcatenation();
+    CharSequence _assignmentKeywordJSON = this.assignmentKeywordJSON(it);
+    _builder.append(_assignmentKeywordJSON);
     {
       boolean _isRequired = it.isRequired();
       boolean _not = (!_isRequired);
@@ -154,8 +156,6 @@ public class Ecore2XtextJSONGrammarCreator {
         _builder.append("(");
       }
     }
-    CharSequence _assignmentKeywordJSON = this.assignmentKeywordJSON(it);
-    _builder.append(_assignmentKeywordJSON);
     {
       boolean _isMany = it.isMany();
       if (_isMany) {
@@ -194,12 +194,6 @@ public class Ecore2XtextJSONGrammarCreator {
         {
           boolean _isContainment_1 = Ecore2XtextExtensions.isContainment(it);
           if (_isContainment_1) {
-            {
-              if ((it instanceof EReference)) {
-                CharSequence _closeParenthesis = this.closeParenthesis(((EReference)it));
-                _builder.append(_closeParenthesis);
-              }
-            }
           } else {
             _builder.append("\')\' ");
           }
@@ -211,6 +205,12 @@ public class Ecore2XtextJSONGrammarCreator {
       boolean _not_1 = (!_isRequired_1);
       if (_not_1) {
         _builder.append(")?");
+      }
+    }
+    {
+      if ((it instanceof EReference)) {
+        CharSequence _closeParenthesis = this.closeParenthesis(((EReference)it));
+        _builder.append(_closeParenthesis);
       }
     }
     _builder.newLineIfNotEmpty();
