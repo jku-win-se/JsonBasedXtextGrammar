@@ -74,7 +74,7 @@ class Ecore2XtextJSONGrammarCreator {
 	
 	def assigment(EStructuralFeature it) {
 		'''	
-			«IF(!required)»(«ENDIF»«assignmentKeywordJSON(it)»«IF many»«IF containment»«IF it instanceof EReference»«it.openParenthesis»«ELSE»'{'«ENDIF»«ELSE»'(' «ENDIF»«ENDIF»«name.quoteIfNeccesary»«assignmentOperator»«assignedTerminal»«IF many» ( "," «name.quoteIfNeccesary»«assignmentOperator»«assignedTerminal»)* «IF containment»«IF it instanceof EReference»«it.closeParenthesis»«ELSE»'{'«ENDIF»«ELSE»')' «ENDIF»«ENDIF»«IF (!required)»)?«ENDIF»
+			«IF(!required)»(«ENDIF»«assignmentKeywordJSON(it)»«IF many»«IF containment»«IF it instanceof EReference»«it.openParenthesis»«ENDIF»«ELSE»'(' «ENDIF»«ENDIF»«name.quoteIfNeccesary»«assignmentOperator»«assignedTerminal»«IF many» ( "," «name.quoteIfNeccesary»«assignmentOperator»«assignedTerminal»)* «IF containment»«IF it instanceof EReference»«it.closeParenthesis»«ENDIF»«ELSE»')' «ENDIF»«ENDIF»«IF (!required)»)?«ENDIF»
 			«IF it instanceof EAttribute»
 				«IF it.isKeyValue»
 					«"'"»:«"'"»
@@ -222,7 +222,7 @@ class Ecore2XtextJSONGrammarCreator {
 		if (needBrackets) {
 			'''«"'"»[«"'"»'''
 		}
-		else 
+		else if (needCurlyBraces)
 			'''«"'"»{«"'"»'''			
 	}	
 	
@@ -230,12 +230,16 @@ class Ecore2XtextJSONGrammarCreator {
 		if (needBrackets) {
 			'''«"'"»]«"'"»'''
 		}
-		else 
+		else if (needCurlyBraces)
 			'''«"'"»}«"'"»'''			
 	}
 	
 	def needBrackets(EReference it) {
 		this.detailedJsonGrammar.bracketsReferences.contains(it) === true;
+	}
+	
+	def needCurlyBraces(EReference it) {
+		this.detailedJsonGrammar.curlyBracesReferences.contains(it) === true;
 	}
 	
 	def JsonGrammar loadJsonGrammar(IFile jsonGrammarFile, ResourceSet reset) {

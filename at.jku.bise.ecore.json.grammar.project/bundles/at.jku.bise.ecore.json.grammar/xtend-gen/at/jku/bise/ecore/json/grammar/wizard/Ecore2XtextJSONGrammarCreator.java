@@ -166,8 +166,6 @@ public class Ecore2XtextJSONGrammarCreator {
               if ((it instanceof EReference)) {
                 CharSequence _openParenthesis = this.openParenthesis(((EReference)it));
                 _builder.append(_openParenthesis);
-              } else {
-                _builder.append("\'{\'");
               }
             }
           } else {
@@ -200,8 +198,6 @@ public class Ecore2XtextJSONGrammarCreator {
               if ((it instanceof EReference)) {
                 CharSequence _closeParenthesis = this.closeParenthesis(((EReference)it));
                 _builder.append(_closeParenthesis);
-              } else {
-                _builder.append("\'{\'");
               }
             }
           } else {
@@ -594,11 +590,16 @@ public class Ecore2XtextJSONGrammarCreator {
       _builder.append("\'");
       _xifexpression = _builder;
     } else {
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("\'");
-      _builder_1.append("{");
-      _builder_1.append("\'");
-      _xifexpression = _builder_1;
+      CharSequence _xifexpression_1 = null;
+      boolean _needCurlyBraces = this.needCurlyBraces(it);
+      if (_needCurlyBraces) {
+        StringConcatenation _builder_1 = new StringConcatenation();
+        _builder_1.append("\'");
+        _builder_1.append("{");
+        _builder_1.append("\'");
+        _xifexpression_1 = _builder_1;
+      }
+      _xifexpression = _xifexpression_1;
     }
     return _xifexpression;
   }
@@ -613,17 +614,27 @@ public class Ecore2XtextJSONGrammarCreator {
       _builder.append("\'");
       _xifexpression = _builder;
     } else {
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("\'");
-      _builder_1.append("}");
-      _builder_1.append("\'");
-      _xifexpression = _builder_1;
+      CharSequence _xifexpression_1 = null;
+      boolean _needCurlyBraces = this.needCurlyBraces(it);
+      if (_needCurlyBraces) {
+        StringConcatenation _builder_1 = new StringConcatenation();
+        _builder_1.append("\'");
+        _builder_1.append("}");
+        _builder_1.append("\'");
+        _xifexpression_1 = _builder_1;
+      }
+      _xifexpression = _xifexpression_1;
     }
     return _xifexpression;
   }
   
   public boolean needBrackets(final EReference it) {
     boolean _contains = this.detailedJsonGrammar.getBracketsReferences().contains(it);
+    return (Boolean.valueOf(_contains) == Boolean.valueOf(true));
+  }
+  
+  public boolean needCurlyBraces(final EReference it) {
+    boolean _contains = this.detailedJsonGrammar.getCurlyBracesReferences().contains(it);
     return (Boolean.valueOf(_contains) == Boolean.valueOf(true));
   }
   
