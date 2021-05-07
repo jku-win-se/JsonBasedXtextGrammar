@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="at.jku.bise.ecore.json.grammar.feature"
+      label="Feature"
+      version="1.0.0.202105071602">
+
+   <description url="http://www.example.com/description">
+      [Enter Feature Description here.]
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <plugin
+         id="at.jku.bise.ecore.json.grammar"
+         download-size="61"
+         install-size="110"
+         version="1.0.0.202105071602"
+         unpack="false"/>
+
+   <plugin
+         id="at.jku.bise.ecore.json.grammar.edit"
+         download-size="11"
+         install-size="20"
+         version="1.0.0.202105071602"
+         unpack="false"/>
+
+   <plugin
+         id="at.jku.bise.ecore.json.grammar.editor"
+         download-size="63"
+         install-size="122"
+         version="1.0.0.202105071602"
+         unpack="false"/>
+
+</feature>

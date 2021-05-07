@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>at.jku.bise.ecore.json.grammar.project</groupId>
+    <artifactId>at.jku.bise.ecore.json.grammar.project.root</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <relativePath>..\pom.xml</relativePath>
+  </parent>
+  <artifactId>bundles</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>[aggregator] bundles</name>
+  <modules>
+    <module>at.jku.bise.ecore.json.grammar</module>
+    <module>at.jku.bise.ecore.json.grammar.edit</module>
+    <module>at.jku.bise.ecore.json.grammar.editor</module>
+    <module>at.jku.bise.ecore.json.grammar.tests</module>
+  </modules>
+</project>

@@ -29,8 +29,6 @@ import org.eclipse.xtext.ui.util.IJdtHelper;
 
 import com.google.common.collect.Iterables;
 
-import jsongrammar.JsonGrammar;
-
 public class WizardNewJSonGrammarCreationPage extends WizardPage{
 
 	private IFile jsonGrammarFile;

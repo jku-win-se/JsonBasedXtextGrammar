@@ -14,8 +14,6 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import jsongrammar.JsonGrammar;
-
 @SuppressWarnings("restriction")
 public class XtextJsonGrammarProjectInfo extends XtextProjectInfo {
 	

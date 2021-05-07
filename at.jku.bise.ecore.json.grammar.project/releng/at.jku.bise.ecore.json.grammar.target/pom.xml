@@ -1,0 +1,13 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>at.jku.bise.ecore.json.grammar.project</groupId>
+        <artifactId>at.jku.bise.ecore.json.grammar.project.releng</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <groupId>at.jku.bise.ecore.json.grammar.project</groupId>
+    <artifactId>at.jku.bise.ecore.json.grammar.target</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>eclipse-target-definition</packaging>
+
+</project>

@@ -1,0 +1,19 @@
+<project>
+ <modelVersion>4.0.0</modelVersion>
+ <groupId>at.jku.bise.ecore.json.grammar.project</groupId>
+ <artifactId>at.jku.bise.ecore.json.grammar.project.root</artifactId>
+ <version>1.0.0-SNAPSHOT</version>
+ <packaging>pom</packaging>
+ <parent>
+   <groupId>at.jku.bise.ecore.json.grammar.project</groupId>
+   <artifactId>at.jku.bise.ecore.json.grammar.tycho.configuration</artifactId>
+   <version>1.0.0-SNAPSHOT</version>
+  <relativePath>./releng/at.jku.bise.ecore.json.grammar.tycho.configuration</relativePath>
+ </parent>
+
+ <modules>
+ 	 <module>bundles</module>
+ 	 <module>releng</module>
+ 	 <module>features</module>
+ </modules>
+</project>

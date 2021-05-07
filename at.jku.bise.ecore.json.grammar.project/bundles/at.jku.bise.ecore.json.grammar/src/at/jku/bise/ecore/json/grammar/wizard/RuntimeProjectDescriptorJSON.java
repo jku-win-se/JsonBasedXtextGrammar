@@ -48,7 +48,7 @@ public class RuntimeProjectDescriptorJSON extends RuntimeProjectDescriptor {
 	public RuntimeProjectDescriptorJSON(WizardConfiguration config) {
 		super(config);		
 	}
-
+	
 	@Override
 	public CharSequence grammar() {
 		CharSequence grammar = null;
@@ -90,5 +90,6 @@ public class RuntimeProjectDescriptorJSON extends RuntimeProjectDescriptor {
 	    _builder.newLine();
 	    return _builder;
 	  }
+	  
 
 }
