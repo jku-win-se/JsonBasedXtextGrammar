@@ -1,2 +1,2 @@
 # JsonBasedXtextGrammar
-#On going
+Update Site: https://jku-win-se.github.io/JsonBasedXtextGrammar/ 
