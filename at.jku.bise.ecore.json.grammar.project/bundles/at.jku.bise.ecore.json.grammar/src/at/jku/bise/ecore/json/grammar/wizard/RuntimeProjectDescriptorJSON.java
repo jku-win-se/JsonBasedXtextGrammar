@@ -43,7 +43,7 @@ import com.google.common.collect.Iterables;
 
 public class RuntimeProjectDescriptorJSON extends RuntimeProjectDescriptor {
 	
-	private final Ecore2XtextJSONGrammarCreator grammarCreator = new Ecore2XtextJSONGrammarCreator();
+	private final Ecore2XtextJSONGrammarCreatorJava grammarCreator = new Ecore2XtextJSONGrammarCreatorJava();
 	
 	public RuntimeProjectDescriptorJSON(WizardConfiguration config) {
 		super(config);		

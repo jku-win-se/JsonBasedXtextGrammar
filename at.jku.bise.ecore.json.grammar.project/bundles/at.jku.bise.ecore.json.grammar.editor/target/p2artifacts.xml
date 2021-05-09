@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <?artifactRepository version='1.1.0'?>
 <artifacts size='1'>
-  <artifact classifier='osgi.bundle' id='at.jku.bise.ecore.json.grammar.editor' version='1.0.0.202105071602'>
+  <artifact classifier='osgi.bundle' id='at.jku.bise.ecore.json.grammar.editor' version='1.0.0.202105091643'>
     <properties size='5'>
-      <property name='artifact.size' value='64876'/>
-      <property name='download.size' value='64876'/>
+      <property name='artifact.size' value='64875'/>
+      <property name='download.size' value='64875'/>
       <property name='maven-groupId' value='at.jku.bise.ecore.json.grammar.project'/>
       <property name='maven-artifactId' value='at.jku.bise.ecore.json.grammar.editor'/>
       <property name='maven-version' value='1.0.0-SNAPSHOT'/>

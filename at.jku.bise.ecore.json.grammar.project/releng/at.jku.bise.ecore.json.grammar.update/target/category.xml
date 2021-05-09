@@ -3,5 +3,5 @@
    <feature id="at.jku.bise.ecore.json.grammar.feature">
       <category name="JSON Grammar"/>
    </feature>
-   <category-def name="JSON Grammar" label="JSON Grammar Update Site"/>
+   <category-def name="JSON Grammar" label="JSON Grammar Update"/>
 </site>

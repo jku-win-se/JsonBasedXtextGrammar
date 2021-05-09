@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <units size='1'>
-  <unit id='at.jku.bise.ecore.json.grammar.editor' version='1.0.0.202105071602' generation='2'>
-    <update id='at.jku.bise.ecore.json.grammar.editor' range='[0.0.0,1.0.0.202105071602)' severity='0'/>
+  <unit id='at.jku.bise.ecore.json.grammar.editor' version='1.0.0.202105091643' generation='2'>
+    <update id='at.jku.bise.ecore.json.grammar.editor' range='[0.0.0,1.0.0.202105091643)' severity='0'/>
     <properties size='8'>
       <property name='df_LT.pluginName' value='Ecore2JsonGrammar Editor'/>
       <property name='df_LT.providerName' value='www.example.org'/>
@@ -13,10 +13,10 @@
       <property name='maven-version' value='1.0.0-SNAPSHOT'/>
     </properties>
     <provides size='6'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='at.jku.bise.ecore.json.grammar.editor' version='1.0.0.202105071602'/>
-      <provided namespace='osgi.bundle' name='at.jku.bise.ecore.json.grammar.editor' version='1.0.0.202105071602'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='at.jku.bise.ecore.json.grammar.editor' version='1.0.0.202105091643'/>
+      <provided namespace='osgi.bundle' name='at.jku.bise.ecore.json.grammar.editor' version='1.0.0.202105091643'/>
       <provided namespace='java.package' name='jsongrammar.presentation' version='0.0.0'/>
-      <provided namespace='osgi.identity' name='at.jku.bise.ecore.json.grammar.editor' version='1.0.0.202105071602'>
+      <provided namespace='osgi.identity' name='at.jku.bise.ecore.json.grammar.editor' version='1.0.0.202105091643'>
         <properties size='1'>
           <property name='type' value='osgi.bundle'/>
         </properties>
@@ -38,13 +38,13 @@
       </requiredProperties>
     </requires>
     <artifacts size='1'>
-      <artifact classifier='osgi.bundle' id='at.jku.bise.ecore.json.grammar.editor' version='1.0.0.202105071602'/>
+      <artifact classifier='osgi.bundle' id='at.jku.bise.ecore.json.grammar.editor' version='1.0.0.202105091643'/>
     </artifacts>
     <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
     <touchpointData size='1'>
       <instructions size='1'>
         <instruction key='manifest'>
-          Bundle-SymbolicName: at.jku.bise.ecore.json.grammar.editor;singleton:=true&#xA;Bundle-Version: 1.0.0.202105071602&#xA;
+          Bundle-SymbolicName: at.jku.bise.ecore.json.grammar.editor;singleton:=true&#xA;Bundle-Version: 1.0.0.202105091643&#xA;
         </instruction>
       </instructions>
     </touchpointData>
