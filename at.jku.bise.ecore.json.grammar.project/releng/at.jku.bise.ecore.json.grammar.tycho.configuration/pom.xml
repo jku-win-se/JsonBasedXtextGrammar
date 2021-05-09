@@ -53,11 +53,8 @@
       </executions>
       <configuration>
         <outputDirectory>xtend-gen</outputDirectory>       
-      </configuration>         
-               
-  </plugin>
-    
-    
+      </configuration> 
+  </plugin>    
     <plugin>
     <groupId>org.eclipse.tycho</groupId>
     <artifactId>target-platform-configuration</artifactId>
