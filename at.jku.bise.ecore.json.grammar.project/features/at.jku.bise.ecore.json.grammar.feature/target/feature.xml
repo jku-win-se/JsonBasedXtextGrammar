@@ -2,7 +2,7 @@
 <feature
       id="at.jku.bise.ecore.json.grammar.feature"
       label="Feature"
-      version="1.0.0.202105091810">
+      version="1.0.0.202105171534">
 
    <description url="http://www.example.com/description">
       [Enter Feature Description here.]
@@ -20,21 +20,21 @@
          id="at.jku.bise.ecore.json.grammar"
          download-size="70"
          install-size="131"
-         version="1.0.0.202105091810"
+         version="1.0.0.202105171534"
          unpack="false"/>
 
    <plugin
          id="at.jku.bise.ecore.json.grammar.edit"
          download-size="11"
          install-size="20"
-         version="1.0.0.202105091810"
+         version="1.0.0.202105171534"
          unpack="false"/>
 
    <plugin
          id="at.jku.bise.ecore.json.grammar.editor"
          download-size="63"
          install-size="122"
-         version="1.0.0.202105091810"
+         version="1.0.0.202105171534"
          unpack="false"/>
 
 </feature>
