@@ -1,6 +1,6 @@
 package at.jku.bise.ecore.json.grammar.wizard;
 
-import at.jku.bise.ecore.json.grammar.wizard.XtextJsonGrammarProjectInfo;
+import at.jku.bise.ecore.json.grammar.ui.utils.Ecore2XtextJSONExtensions;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.ArrayList;
@@ -235,7 +235,7 @@ public class Ecore2XtextJSONGrammarCreator {
     boolean _matched = false;
     if (it instanceof EAttribute) {
       _matched=true;
-      _switchResult = Ecore2XtextExtensions.assignedRuleCall(((EAttribute)it));
+      _switchResult = Ecore2XtextJSONExtensions.assignedJSONRuleCall(((EAttribute)it));
     }
     if (!_matched) {
       if (it instanceof EReference) {
@@ -510,7 +510,7 @@ public class Ecore2XtextJSONGrammarCreator {
       CharSequence _xifexpression = null;
       if ((idAttr != null)) {
         StringConcatenation _builder = new StringConcatenation();
-        _builder.append("//Keyword´s Name");
+        _builder.append("//KeywordÂ´s Name");
         _builder.newLine();
         CharSequence _assigment = this.assigment(idAttr);
         _builder.append(_assigment);
