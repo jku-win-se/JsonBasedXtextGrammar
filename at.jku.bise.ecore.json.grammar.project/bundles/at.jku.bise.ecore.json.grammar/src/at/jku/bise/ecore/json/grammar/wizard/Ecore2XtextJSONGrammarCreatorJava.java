@@ -201,7 +201,9 @@ public class Ecore2XtextJSONGrammarCreatorJava {
       }
     }
     {
-      if (((!it.isRequired()) && (!(it instanceof EAttribute)))) {
+      boolean _isRequired_1 = it.isRequired();
+      boolean _not_1 = (!_isRequired_1);
+      if (_not_1) {
         _builder.append(")?");
       }
     }
@@ -267,11 +269,7 @@ public class Ecore2XtextJSONGrammarCreatorJava {
       if (_isMany) {
         _builder.append("+=");
       } else {
-        if ((Ecore2XtextExtensions.isBoolean(it.getEType()) && Ecore2XtextExtensions.isPrefixBooleanFeature(it))) {
-          _builder.append("?=");
-        } else {
-          _builder.append("=");
-        }
+        _builder.append("=");
       }
     }
     return _builder;
@@ -449,49 +447,42 @@ public class Ecore2XtextJSONGrammarCreatorJava {
   
   public CharSequence assignmentKeywordJSON(final EStructuralFeature it) {
     CharSequence _xifexpression = null;
-    boolean _isPrefixBooleanFeature = Ecore2XtextExtensions.isPrefixBooleanFeature(it);
-    if (_isPrefixBooleanFeature) {
-      _xifexpression = "";
+    boolean _isKeyword = this.isKeyword(it);
+    if (_isKeyword) {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("//Keywords");
+      _builder.newLine();
+      _builder.append("\'\"");
+      String _name = it.getName();
+      _builder.append(_name);
+      _builder.append("\"\' ");
+      CharSequence _jsonSeparator = this.jsonSeparator(it);
+      _builder.append(_jsonSeparator);
+      _builder.newLineIfNotEmpty();
+      _xifexpression = _builder;
     } else {
       CharSequence _xifexpression_1 = null;
-      boolean _isKeyword = this.isKeyword(it);
-      if (_isKeyword) {
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("//Keywords");
-        _builder.newLine();
-        _builder.append("\'\"");
-        String _name = it.getName();
-        _builder.append(_name);
-        _builder.append("\"\' ");
-        CharSequence _jsonSeparator = this.jsonSeparator(it);
-        _builder.append(_jsonSeparator);
-        _builder.newLineIfNotEmpty();
-        _xifexpression_1 = _builder;
+      if ((it instanceof EReference)) {
+        StringConcatenation _builder_1 = new StringConcatenation();
+        _builder_1.append("//EReference is not a keyword");
+        _builder_1.newLine();
+        _xifexpression_1 = _builder_1;
       } else {
         CharSequence _xifexpression_2 = null;
-        if ((it instanceof EReference)) {
-          StringConcatenation _builder_1 = new StringConcatenation();
-          _builder_1.append("//EReference is not a keyword");
-          _builder_1.newLine();
-          _xifexpression_2 = _builder_1;
-        } else {
+        if ((it instanceof EAttribute)) {
           CharSequence _xifexpression_3 = null;
-          if ((it instanceof EAttribute)) {
-            CharSequence _xifexpression_4 = null;
-            boolean _isKeyValue = this.isKeyValue(((EAttribute)it));
-            if (_isKeyValue) {
-              StringConcatenation _builder_2 = new StringConcatenation();
-              _builder_2.append("//KeyValue");
-              _builder_2.newLine();
-              _xifexpression_4 = _builder_2;
-            }
-            _xifexpression_3 = _xifexpression_4;
-          } else {
-            String _name_1 = it.getName();
-            String _plus = ("\'" + _name_1);
-            _xifexpression_3 = (_plus + "\' ");
+          boolean _isKeyValue = this.isKeyValue(((EAttribute)it));
+          if (_isKeyValue) {
+            StringConcatenation _builder_2 = new StringConcatenation();
+            _builder_2.append("//KeyValue");
+            _builder_2.newLine();
+            _xifexpression_3 = _builder_2;
           }
           _xifexpression_2 = _xifexpression_3;
+        } else {
+          String _name_1 = it.getName();
+          String _plus = ("\'" + _name_1);
+          _xifexpression_2 = (_plus + "\' ");
         }
         _xifexpression_1 = _xifexpression_2;
       }
