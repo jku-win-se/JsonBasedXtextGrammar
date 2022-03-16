@@ -9,7 +9,7 @@
     <relativePath>..\pom.xml</relativePath>
   </parent>
   <artifactId>at.jku.bise.ecore.json.grammar.feature</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1-SNAPSHOT</version>
   <packaging>eclipse-feature</packaging>
   <name>[feature] JsonGrammar</name>
 </project>
