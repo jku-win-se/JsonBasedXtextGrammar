@@ -6,6 +6,7 @@ import static org.eclipse.xtext.xtext.wizard.ecore2xtext.Ecore2XtextExtensions.*
 
 public class Ecore2XtextJSONExtensions {
 	
+	//Similar to Ecore2XtextExtensions.assignedRuleCall(EAttribute it)
 	public static String assignedJSONRuleCall(EAttribute it) {
 			return UniqueNameUtil.uniqueName(it.getEType());		
 	} 

@@ -1,7 +1,6 @@
 package at.jku.bise.ecore.json.grammar.wizard;
 
 import at.jku.bise.ecore.json.grammar.ui.utils.Ecore2XtextJSONExtensions;
-import at.jku.bise.ecore.json.grammar.wizard.XtextJsonGrammarProjectInfo;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.ArrayList;
@@ -35,7 +34,7 @@ import org.eclipse.xtext.xtext.wizard.ecore2xtext.Ecore2XtextExtensions;
 import org.eclipse.xtext.xtext.wizard.ecore2xtext.UniqueNameUtil;
 
 @SuppressWarnings("all")
-public class Ecore2XtextJSONGrammarCreatorJava{
+public class Ecore2XtextJSONGrammarCreatorJava {
   private DetailedGrammar detailedJsonGrammar = null;
   
   public CharSequence grammar(final WizardConfiguration config) {
@@ -202,9 +201,7 @@ public class Ecore2XtextJSONGrammarCreatorJava{
       }
     }
     {
-      boolean _isRequired_1 = it.isRequired();
-      boolean _not_1 = (!_isRequired_1);
-      if (_not_1) {
+      if (((!it.isRequired()) && (!(it instanceof EAttribute)))) {
         _builder.append(")?");
       }
     }
@@ -511,7 +508,7 @@ public class Ecore2XtextJSONGrammarCreatorJava{
       CharSequence _xifexpression = null;
       if ((idAttr != null)) {
         StringConcatenation _builder = new StringConcatenation();
-        _builder.append("//Keyword�s Name");
+        _builder.append("//Keyword´s Name");
         _builder.newLine();
         CharSequence _assigment = this.assigment(idAttr);
         _builder.append(_assigment);
