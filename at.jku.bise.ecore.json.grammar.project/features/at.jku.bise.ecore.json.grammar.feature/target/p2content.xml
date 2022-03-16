@@ -15,9 +15,9 @@
       <provided namespace='org.eclipse.equinox.p2.iu' name='at.jku.bise.ecore.json.grammar.feature.feature.group' version='1.0.0'/>
     </provides>
     <requires size='4'>
-      <required namespace='org.eclipse.equinox.p2.iu' name='at.jku.bise.ecore.json.grammar' range='[1.0.0,1.0.0]'/>
-      <required namespace='org.eclipse.equinox.p2.iu' name='at.jku.bise.ecore.json.grammar.edit' range='[1.0.0,1.0.0]'/>
-      <required namespace='org.eclipse.equinox.p2.iu' name='at.jku.bise.ecore.json.grammar.editor' range='[1.0.0,1.0.0]'/>
+      <required namespace='org.eclipse.equinox.p2.iu' name='at.jku.bise.ecore.json.grammar' range='[1.0.1.202203161751,1.0.1.202203161751]'/>
+      <required namespace='org.eclipse.equinox.p2.iu' name='at.jku.bise.ecore.json.grammar.edit' range='[1.0.1.202203161751,1.0.1.202203161751]'/>
+      <required namespace='org.eclipse.equinox.p2.iu' name='at.jku.bise.ecore.json.grammar.editor' range='[1.0.1.202203161751,1.0.1.202203161751]'/>
       <required namespace='org.eclipse.equinox.p2.iu' name='at.jku.bise.ecore.json.grammar.feature.feature.jar' range='[1.0.0,1.0.0]'>
         <filter>
           (org.eclipse.update.install.features=true)

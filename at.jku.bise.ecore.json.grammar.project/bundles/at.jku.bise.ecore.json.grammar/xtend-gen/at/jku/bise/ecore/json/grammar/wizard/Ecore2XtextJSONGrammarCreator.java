@@ -1,6 +1,7 @@
 package at.jku.bise.ecore.json.grammar.wizard;
 
 import at.jku.bise.ecore.json.grammar.ui.utils.Ecore2XtextJSONExtensions;
+import at.jku.bise.ecore.json.grammar.wizard.XtextJsonGrammarProjectInfo;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.ArrayList;

@@ -1132,52 +1132,6 @@
         </instructions>
       </touchpointData>
     </unit>
-    <unit id='at.jku.bise.ecore.json.grammar.edit' version='1.0.0' generation='2'>
-      <update id='at.jku.bise.ecore.json.grammar.edit' range='[0.0.0,1.0.0)' severity='0'/>
-      <properties size='8'>
-        <property name='df_LT.pluginName' value='Ecore2JsonGrammar Edit Support'/>
-        <property name='df_LT.providerName' value='www.example.org'/>
-        <property name='org.eclipse.equinox.p2.name' value='%pluginName'/>
-        <property name='org.eclipse.equinox.p2.provider' value='%providerName'/>
-        <property name='org.eclipse.equinox.p2.bundle.localization' value='plugin'/>
-        <property name='maven-groupId' value='at.jku.bise.ecore.json.grammar.project'/>
-        <property name='maven-artifactId' value='at.jku.bise.ecore.json.grammar.edit'/>
-        <property name='maven-version' value='1.0.0'/>
-      </properties>
-      <provides size='6'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='at.jku.bise.ecore.json.grammar.edit' version='1.0.0'/>
-        <provided namespace='osgi.bundle' name='at.jku.bise.ecore.json.grammar.edit' version='1.0.0'/>
-        <provided namespace='java.package' name='jsongrammar.provider' version='0.0.0'/>
-        <provided namespace='osgi.identity' name='at.jku.bise.ecore.json.grammar.edit' version='1.0.0'>
-          <properties size='1'>
-            <property name='type' value='osgi.bundle'/>
-          </properties>
-        </provided>
-        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
-        <provided namespace='org.eclipse.equinox.p2.localization' name='df_LT' version='1.0.0'/>
-      </provides>
-      <requires size='4'>
-        <required namespace='osgi.bundle' name='org.eclipse.core.runtime' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='at.jku.bise.ecore.json.grammar' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.emf.edit' range='0.0.0'/>
-        <requiredProperties namespace='osgi.ee' match='(&amp;(osgi.ee=JavaSE)(version=1.5))'>
-          <description>
-            at.jku.bise.ecore.json.grammar.edit
-          </description>
-        </requiredProperties>
-      </requires>
-      <artifacts size='1'>
-        <artifact classifier='osgi.bundle' id='at.jku.bise.ecore.json.grammar.edit' version='1.0.0'/>
-      </artifacts>
-      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
-      <touchpointData size='1'>
-        <instructions size='1'>
-          <instruction key='manifest'>
-            Bundle-SymbolicName: at.jku.bise.ecore.json.grammar.edit;singleton:=true&#xA;Bundle-Version: 1.0.0
-          </instruction>
-        </instructions>
-      </touchpointData>
-    </unit>
     <unit id='org.apache.commons.logging' version='1.2.0.v20180409-1502' singleton='false'>
       <update id='org.apache.commons.logging' range='[0.0.0,1.2.0.v20180409-1502)' severity='0'/>
       <properties size='9'>
@@ -4947,6 +4901,63 @@
         </instructions>
       </touchpointData>
     </unit>
+    <unit id='at.jku.bise.ecore.json.grammar' version='1.0.1.202203161751' generation='2'>
+      <update id='at.jku.bise.ecore.json.grammar' range='[0.0.0,1.0.1.202203161751)' severity='0'/>
+      <properties size='8'>
+        <property name='df_LT.pluginName' value='Ecore2JsonGrammar'/>
+        <property name='df_LT.providerName' value='www.example.org'/>
+        <property name='org.eclipse.equinox.p2.name' value='%pluginName'/>
+        <property name='org.eclipse.equinox.p2.provider' value='%providerName'/>
+        <property name='org.eclipse.equinox.p2.bundle.localization' value='plugin'/>
+        <property name='maven-groupId' value='at.jku.bise.ecore.json.grammar.project'/>
+        <property name='maven-artifactId' value='at.jku.bise.ecore.json.grammar'/>
+        <property name='maven-version' value='1.0.1-SNAPSHOT'/>
+      </properties>
+      <provides size='8'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='at.jku.bise.ecore.json.grammar' version='1.0.1.202203161751'/>
+        <provided namespace='osgi.bundle' name='at.jku.bise.ecore.json.grammar' version='1.0.1.202203161751'/>
+        <provided namespace='java.package' name='jsongrammar' version='0.0.0'/>
+        <provided namespace='java.package' name='jsongrammar.impl' version='0.0.0'/>
+        <provided namespace='java.package' name='jsongrammar.util' version='0.0.0'/>
+        <provided namespace='osgi.identity' name='at.jku.bise.ecore.json.grammar' version='1.0.1.202203161751'>
+          <properties size='1'>
+            <property name='type' value='osgi.bundle'/>
+          </properties>
+        </provided>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+        <provided namespace='org.eclipse.equinox.p2.localization' name='df_LT' version='1.0.0'/>
+      </provides>
+      <requires size='13'>
+        <required namespace='osgi.bundle' name='org.eclipse.ui' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.core.runtime' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.emf.ecore' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext.ui' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext.xtext.ui' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext.xtext.wizard' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.ui.ide' range='3.17.200'/>
+        <required namespace='osgi.bundle' name='org.eclipse.jdt.core' range='3.23.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.jdt.launching' range='3.18.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext.xbase' range='2.23.0'/>
+        <required namespace='osgi.bundle' name='org.apache.log4j' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.xtext.ui.shared' range='0.0.0'/>
+        <requiredProperties namespace='osgi.ee' match='(&amp;(osgi.ee=JavaSE)(version=11))'>
+          <description>
+            at.jku.bise.ecore.json.grammar
+          </description>
+        </requiredProperties>
+      </requires>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='at.jku.bise.ecore.json.grammar' version='1.0.1.202203161751'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: at.jku.bise.ecore.json.grammar;singleton:=true&#xA;Bundle-Version: 1.0.1.202203161751
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
     <unit id='org.eclipse.ltk.ui.refactoring' version='3.11.100.v20200817-1715' generation='2'>
       <update id='org.eclipse.ltk.ui.refactoring' range='[0.0.0,3.11.100.v20200817-1715)' severity='0'/>
       <properties size='8'>
@@ -6050,55 +6061,6 @@
         <instructions size='1'>
           <instruction key='manifest'>
             Bundle-SymbolicName: org.eclipse.ui.workbench; singleton:=true&#xA;Bundle-Version: 3.120.0.v20200829-1411
-          </instruction>
-        </instructions>
-      </touchpointData>
-    </unit>
-    <unit id='at.jku.bise.ecore.json.grammar.editor' version='1.0.0' generation='2'>
-      <update id='at.jku.bise.ecore.json.grammar.editor' range='[0.0.0,1.0.0)' severity='0'/>
-      <properties size='8'>
-        <property name='df_LT.pluginName' value='Ecore2JsonGrammar Editor'/>
-        <property name='df_LT.providerName' value='www.example.org'/>
-        <property name='org.eclipse.equinox.p2.name' value='%pluginName'/>
-        <property name='org.eclipse.equinox.p2.provider' value='%providerName'/>
-        <property name='org.eclipse.equinox.p2.bundle.localization' value='plugin'/>
-        <property name='maven-groupId' value='at.jku.bise.ecore.json.grammar.project'/>
-        <property name='maven-artifactId' value='at.jku.bise.ecore.json.grammar.editor'/>
-        <property name='maven-version' value='1.0.0'/>
-      </properties>
-      <provides size='6'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='at.jku.bise.ecore.json.grammar.editor' version='1.0.0'/>
-        <provided namespace='osgi.bundle' name='at.jku.bise.ecore.json.grammar.editor' version='1.0.0'/>
-        <provided namespace='java.package' name='jsongrammar.presentation' version='0.0.0'/>
-        <provided namespace='osgi.identity' name='at.jku.bise.ecore.json.grammar.editor' version='1.0.0'>
-          <properties size='1'>
-            <property name='type' value='osgi.bundle'/>
-          </properties>
-        </provided>
-        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
-        <provided namespace='org.eclipse.equinox.p2.localization' name='df_LT' version='1.0.0'/>
-      </provides>
-      <requires size='7'>
-        <required namespace='osgi.bundle' name='org.eclipse.core.runtime' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.core.resources' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='at.jku.bise.ecore.json.grammar.edit' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.emf.ecore.xmi' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.emf.edit.ui' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.ui.ide' range='0.0.0'/>
-        <requiredProperties namespace='osgi.ee' match='(&amp;(osgi.ee=JavaSE)(version=1.5))'>
-          <description>
-            at.jku.bise.ecore.json.grammar.editor
-          </description>
-        </requiredProperties>
-      </requires>
-      <artifacts size='1'>
-        <artifact classifier='osgi.bundle' id='at.jku.bise.ecore.json.grammar.editor' version='1.0.0'/>
-      </artifacts>
-      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
-      <touchpointData size='1'>
-        <instructions size='1'>
-          <instruction key='manifest'>
-            Bundle-SymbolicName: at.jku.bise.ecore.json.grammar.editor;singleton:=true&#xA;Bundle-Version: 1.0.0
           </instruction>
         </instructions>
       </touchpointData>
@@ -8019,9 +7981,9 @@
         <provided namespace='org.eclipse.equinox.p2.iu' name='at.jku.bise.ecore.json.grammar.feature.feature.group' version='1.0.0'/>
       </provides>
       <requires size='4'>
-        <required namespace='org.eclipse.equinox.p2.iu' name='at.jku.bise.ecore.json.grammar' range='[1.0.0,1.0.0]'/>
-        <required namespace='org.eclipse.equinox.p2.iu' name='at.jku.bise.ecore.json.grammar.edit' range='[1.0.0,1.0.0]'/>
-        <required namespace='org.eclipse.equinox.p2.iu' name='at.jku.bise.ecore.json.grammar.editor' range='[1.0.0,1.0.0]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='at.jku.bise.ecore.json.grammar' range='[1.0.1.202203161751,1.0.1.202203161751]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='at.jku.bise.ecore.json.grammar.edit' range='[1.0.1.202203161751,1.0.1.202203161751]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='at.jku.bise.ecore.json.grammar.editor' range='[1.0.1.202203161751,1.0.1.202203161751]'/>
         <required namespace='org.eclipse.equinox.p2.iu' name='at.jku.bise.ecore.json.grammar.feature.feature.jar' range='[1.0.0,1.0.0]'>
           <filter>
             (org.eclipse.update.install.features=true)
@@ -8523,6 +8485,52 @@
         <instructions size='1'>
           <instruction key='manifest'>
             Bundle-SymbolicName: org.eclipse.core.databinding.observable&#xA;Bundle-Version: 1.10.0.v20200730-0848
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='at.jku.bise.ecore.json.grammar.edit' version='1.0.1.202203161751' generation='2'>
+      <update id='at.jku.bise.ecore.json.grammar.edit' range='[0.0.0,1.0.1.202203161751)' severity='0'/>
+      <properties size='8'>
+        <property name='df_LT.pluginName' value='Ecore2JsonGrammar Edit Support'/>
+        <property name='df_LT.providerName' value='www.example.org'/>
+        <property name='org.eclipse.equinox.p2.name' value='%pluginName'/>
+        <property name='org.eclipse.equinox.p2.provider' value='%providerName'/>
+        <property name='org.eclipse.equinox.p2.bundle.localization' value='plugin'/>
+        <property name='maven-groupId' value='at.jku.bise.ecore.json.grammar.project'/>
+        <property name='maven-artifactId' value='at.jku.bise.ecore.json.grammar.edit'/>
+        <property name='maven-version' value='1.0.1-SNAPSHOT'/>
+      </properties>
+      <provides size='6'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='at.jku.bise.ecore.json.grammar.edit' version='1.0.1.202203161751'/>
+        <provided namespace='osgi.bundle' name='at.jku.bise.ecore.json.grammar.edit' version='1.0.1.202203161751'/>
+        <provided namespace='java.package' name='jsongrammar.provider' version='0.0.0'/>
+        <provided namespace='osgi.identity' name='at.jku.bise.ecore.json.grammar.edit' version='1.0.1.202203161751'>
+          <properties size='1'>
+            <property name='type' value='osgi.bundle'/>
+          </properties>
+        </provided>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+        <provided namespace='org.eclipse.equinox.p2.localization' name='df_LT' version='1.0.0'/>
+      </provides>
+      <requires size='4'>
+        <required namespace='osgi.bundle' name='org.eclipse.core.runtime' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='at.jku.bise.ecore.json.grammar' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.emf.edit' range='0.0.0'/>
+        <requiredProperties namespace='osgi.ee' match='(&amp;(osgi.ee=JavaSE)(version=1.5))'>
+          <description>
+            at.jku.bise.ecore.json.grammar.edit
+          </description>
+        </requiredProperties>
+      </requires>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='at.jku.bise.ecore.json.grammar.edit' version='1.0.1.202203161751'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: at.jku.bise.ecore.json.grammar.edit;singleton:=true&#xA;Bundle-Version: 1.0.1.202203161751
           </instruction>
         </instructions>
       </touchpointData>
@@ -9816,6 +9824,55 @@
         </instructions>
       </touchpointData>
     </unit>
+    <unit id='at.jku.bise.ecore.json.grammar.editor' version='1.0.1.202203161751' generation='2'>
+      <update id='at.jku.bise.ecore.json.grammar.editor' range='[0.0.0,1.0.1.202203161751)' severity='0'/>
+      <properties size='8'>
+        <property name='df_LT.pluginName' value='Ecore2JsonGrammar Editor'/>
+        <property name='df_LT.providerName' value='www.example.org'/>
+        <property name='org.eclipse.equinox.p2.name' value='%pluginName'/>
+        <property name='org.eclipse.equinox.p2.provider' value='%providerName'/>
+        <property name='org.eclipse.equinox.p2.bundle.localization' value='plugin'/>
+        <property name='maven-groupId' value='at.jku.bise.ecore.json.grammar.project'/>
+        <property name='maven-artifactId' value='at.jku.bise.ecore.json.grammar.editor'/>
+        <property name='maven-version' value='1.0.1-SNAPSHOT'/>
+      </properties>
+      <provides size='6'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='at.jku.bise.ecore.json.grammar.editor' version='1.0.1.202203161751'/>
+        <provided namespace='osgi.bundle' name='at.jku.bise.ecore.json.grammar.editor' version='1.0.1.202203161751'/>
+        <provided namespace='java.package' name='jsongrammar.presentation' version='0.0.0'/>
+        <provided namespace='osgi.identity' name='at.jku.bise.ecore.json.grammar.editor' version='1.0.1.202203161751'>
+          <properties size='1'>
+            <property name='type' value='osgi.bundle'/>
+          </properties>
+        </provided>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+        <provided namespace='org.eclipse.equinox.p2.localization' name='df_LT' version='1.0.0'/>
+      </provides>
+      <requires size='7'>
+        <required namespace='osgi.bundle' name='org.eclipse.core.runtime' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.core.resources' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='at.jku.bise.ecore.json.grammar.edit' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.emf.ecore.xmi' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.emf.edit.ui' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.ui.ide' range='0.0.0'/>
+        <requiredProperties namespace='osgi.ee' match='(&amp;(osgi.ee=JavaSE)(version=1.5))'>
+          <description>
+            at.jku.bise.ecore.json.grammar.editor
+          </description>
+        </requiredProperties>
+      </requires>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='at.jku.bise.ecore.json.grammar.editor' version='1.0.1.202203161751'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: at.jku.bise.ecore.json.grammar.editor;singleton:=true&#xA;Bundle-Version: 1.0.1.202203161751
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
     <unit id='org.eclipse.osgi.util' version='3.5.300.v20190708-1141' singleton='false' generation='2'>
       <update id='org.eclipse.osgi.util' range='[0.0.0,3.5.300.v20190708-1141)' severity='0'/>
       <properties size='12'>
@@ -10441,63 +10498,6 @@
         <instructions size='1'>
           <instruction key='manifest'>
             Bundle-SymbolicName: org.eclipse.jdt.ui; singleton:=true&#xA;Bundle-Version: 3.21.200.v20200828-0853
-          </instruction>
-        </instructions>
-      </touchpointData>
-    </unit>
-    <unit id='at.jku.bise.ecore.json.grammar' version='1.0.0' generation='2'>
-      <update id='at.jku.bise.ecore.json.grammar' range='[0.0.0,1.0.0)' severity='0'/>
-      <properties size='8'>
-        <property name='df_LT.pluginName' value='Ecore2JsonGrammar'/>
-        <property name='df_LT.providerName' value='www.example.org'/>
-        <property name='org.eclipse.equinox.p2.name' value='%pluginName'/>
-        <property name='org.eclipse.equinox.p2.provider' value='%providerName'/>
-        <property name='org.eclipse.equinox.p2.bundle.localization' value='plugin'/>
-        <property name='maven-groupId' value='at.jku.bise.ecore.json.grammar.project'/>
-        <property name='maven-artifactId' value='at.jku.bise.ecore.json.grammar'/>
-        <property name='maven-version' value='1.0.0'/>
-      </properties>
-      <provides size='8'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='at.jku.bise.ecore.json.grammar' version='1.0.0'/>
-        <provided namespace='osgi.bundle' name='at.jku.bise.ecore.json.grammar' version='1.0.0'/>
-        <provided namespace='java.package' name='jsongrammar' version='0.0.0'/>
-        <provided namespace='java.package' name='jsongrammar.impl' version='0.0.0'/>
-        <provided namespace='java.package' name='jsongrammar.util' version='0.0.0'/>
-        <provided namespace='osgi.identity' name='at.jku.bise.ecore.json.grammar' version='1.0.0'>
-          <properties size='1'>
-            <property name='type' value='osgi.bundle'/>
-          </properties>
-        </provided>
-        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
-        <provided namespace='org.eclipse.equinox.p2.localization' name='df_LT' version='1.0.0'/>
-      </provides>
-      <requires size='13'>
-        <required namespace='osgi.bundle' name='org.eclipse.ui' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.core.runtime' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.emf.ecore' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext.ui' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext.xtext.ui' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext.xtext.wizard' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.ui.ide' range='3.17.200'/>
-        <required namespace='osgi.bundle' name='org.eclipse.jdt.core' range='3.23.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.jdt.launching' range='3.18.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext.xbase' range='2.23.0'/>
-        <required namespace='osgi.bundle' name='org.apache.log4j' range='0.0.0'/>
-        <required namespace='osgi.bundle' name='org.eclipse.xtext.ui.shared' range='0.0.0'/>
-        <requiredProperties namespace='osgi.ee' match='(&amp;(osgi.ee=JavaSE)(version=11))'>
-          <description>
-            at.jku.bise.ecore.json.grammar
-          </description>
-        </requiredProperties>
-      </requires>
-      <artifacts size='1'>
-        <artifact classifier='osgi.bundle' id='at.jku.bise.ecore.json.grammar' version='1.0.0'/>
-      </artifacts>
-      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
-      <touchpointData size='1'>
-        <instructions size='1'>
-          <instruction key='manifest'>
-            Bundle-SymbolicName: at.jku.bise.ecore.json.grammar;singleton:=true&#xA;Bundle-Version: 1.0.0
           </instruction>
         </instructions>
       </touchpointData>

@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: at.jku.bise.ecore.json.grammar.edit;singleton:=true
 Automatic-Module-Name: at.jku.bise.ecore.json.grammar.edit
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.1.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: jsongrammar.provider.JsonGrammarEditPlugin$Implementation
 Bundle-Vendor: %providerName
