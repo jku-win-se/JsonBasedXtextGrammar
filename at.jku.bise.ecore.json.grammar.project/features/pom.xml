@@ -2,13 +2,13 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>at.jku.bise.ecore.json.grammar.project</groupId>
     <artifactId>at.jku.bise.ecore.json.grammar.features</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <parent>
         <groupId>at.jku.bise.ecore.json.grammar.project</groupId>
         <artifactId>at.jku.bise.ecore.json.grammar.project.root</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.1-SNAPSHOT</version>
     </parent>
 
     <modules>

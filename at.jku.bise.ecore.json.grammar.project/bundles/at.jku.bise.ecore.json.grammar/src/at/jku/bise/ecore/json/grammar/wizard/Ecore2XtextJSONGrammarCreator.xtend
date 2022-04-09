@@ -98,8 +98,13 @@ class Ecore2XtextJSONGrammarCreator {
 		}
 	}
 
+// I thinkthat we do not need the prefix..
+//	def assignmentOperator(EStructuralFeature it) {
+//		'''«IF many»+=«ELSEIF isBoolean(EType) && prefixBooleanFeature»?=«ELSE»=«ENDIF»'''
+//	}
+	
 	def assignmentOperator(EStructuralFeature it) {
-		'''«IF many»+=«ELSEIF isBoolean(EType)&&prefixBooleanFeature»?=«ELSE»=«ENDIF»'''
+		'''«IF many»+=«ELSE»=«ENDIF»'''
 	}
 
 	def rules(EClassifier it) {
@@ -162,9 +167,11 @@ class Ecore2XtextJSONGrammarCreator {
 	}
 	
 	def assignmentKeywordJSON(EStructuralFeature it) {
-		if (isPrefixBooleanFeature(it))
-			""
-		else if (it.isKeyword) {
+		//TODO figure it out Why?
+		//if (isPrefixBooleanFeature(it))
+		//	""
+		//else
+		if (it.isKeyword) {
 			''' 
 				//Keywords
 				'"«it.name»"' «jsonSeparator»
