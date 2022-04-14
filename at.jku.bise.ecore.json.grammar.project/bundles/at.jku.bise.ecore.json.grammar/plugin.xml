@@ -20,5 +20,47 @@
             class="jsongrammar.JsongrammarPackage"
             genModel="mm/JsonGrammar.genmodel"/>
    </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.ui.popup.any">
+         <menu
+               label="Create Language">
+            <command
+                  commandId="at.jku.bise.ecore.json.grammar.createlanuage"
+                  label="Create Language"
+                  style="push">
+            </command>
+            <visibleWhen
+                  checkEnabled="false">
+               <iterate>
+                  <adapt
+                        type="org.eclipse.core.resources.IFile">
+                     <test
+                           property="org.eclipse.core.resources.name"
+                           value="*.jschema">
+                     </test>
+                  </adapt>
+               </iterate>
+            </visibleWhen>
+         </menu>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="at.jku.bise.ecore.json.grammar.handlers.CreateLanguageHandler"
+            id="at.jku.bise.ecore.json.grammar.createlanuage"
+            name="Create Language">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="at.jku.bise.ecore.json.grammar.handlers.CreateLanguageHandler"
+            commandId="at.jku.bise.ecore.json.grammar.createlanuage">
+      </handler>
+   </extension>
 
 </plugin>
