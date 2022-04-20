@@ -33,6 +33,8 @@ public class WizardNewJSonGrammarCreationPage extends WizardPage{
 
 	private IFile jsonGrammarFile;
 	
+	
+
 	private TableViewer importedEPackagesViewer;
 	
 	private final IJdtHelper jdtHelper;
@@ -131,5 +133,10 @@ public class WizardNewJSonGrammarCreationPage extends WizardPage{
 	
 	public IFile getJsonGrammarFile() {
 		return jsonGrammarFile;
+	}
+	
+	public void setJsonGrammarFile(IFile jsonGrammarFile) {
+		this.jsonGrammarFile = jsonGrammarFile;
+		updateUI();
 	}
 }

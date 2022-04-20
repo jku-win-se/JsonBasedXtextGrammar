@@ -20,7 +20,9 @@ Require-Bundle: org.eclipse.ui,
  org.apache.log4j,
  org.eclipse.xtext.ui.shared,
  org.eclipse.jface,
- org.eclipse.core.resources
+ org.eclipse.core.resources,
+ org.eclipse.emf.codegen.ecore;bundle-version="2.23.0",
+ jsonmetaschemaMM
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: jsongrammar,
  jsongrammar.impl,

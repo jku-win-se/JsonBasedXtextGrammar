@@ -2,26 +2,40 @@ package at.jku.bise.ecore.json.grammar.wizard;
 
 import java.nio.charset.Charset;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.ui.util.IJdtHelper;
 import org.eclipse.xtext.ui.wizard.IProjectInfo;
+import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.EPackageChooser;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Messages;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.WizardSelectImportedEPackagePage;
 import org.eclipse.xtext.xtext.ui.wizard.project.NewXtextProjectWizard;
 import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectCreator;
 import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectInfo;
+import org.eclipse.xtext.xtext.wizard.EPackageInfo;
 import org.eclipse.xtext.xtext.wizard.Ecore2XtextConfiguration;
 import org.eclipse.xtext.xtext.wizard.RuntimeProjectDescriptor;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 
 public class NewXtextProjectFromEcoreJsonGrammarWizard extends NewXtextProjectWizard {
 	
-	private WizardSelectImportedEPackagePage ePackageSelectionPage;
-	private final IJdtHelper jdtHelper;
-	private WizardNewJSonGrammarCreationPage grammarSelectionPage;
+	public static final String JSON_GRAMMAR_CREATION_PAGE_NAME ="Selection Custom JSON Grammar Specification";
+	public static final String E_PACKAGE_CREATION_PAGE_NAME = "ePackageSelectionPage";
+	
+	
+	private WizardSelectImportedEPackagePage ePackageSelectionPage  = null;
+	
 
+
+	private final IJdtHelper jdtHelper;
+	private WizardNewJSonGrammarCreationPage grammarSelectionPage = null;
+
+	
 	/**
 	 * Constructs a new wizard
 	 */
@@ -34,10 +48,12 @@ public class NewXtextProjectFromEcoreJsonGrammarWizard extends NewXtextProjectWi
 
 	@Override
 	public void addPages() {
-		ePackageSelectionPage = new WizardSelectImportedEPackagePage("ePackageSelectionPage", selection, jdtHelper);
-		grammarSelectionPage = new WizardNewJSonGrammarCreationPage("Selection Custom JSON Grammar Specification", selection, jdtHelper);
-		addPage(grammarSelectionPage);
-		addPage(ePackageSelectionPage); //$NON-NLS-1$		
+//		ePackageSelectionPage = new WizardSelectImportedEPackagePage("ePackageSelectionPage", selection, jdtHelper);
+//		grammarSelectionPage = new WizardNewJSonGrammarCreationPage(JSON_GRAMMAR_CREATION_PAGE_NAME, selection, jdtHelper);
+//		addPage(grammarSelectionPage);
+		addGrammarSelectionPage();
+//		addPage(ePackageSelectionPage); //$NON-NLS-1$	
+		addEPackageSelectionPage();
 		super.addPages();
 	}
 
@@ -59,4 +75,35 @@ public class NewXtextProjectFromEcoreJsonGrammarWizard extends NewXtextProjectWi
 		return new XtextJsonGrammarProjectInfo();
 	}
 	
+	public void addGrammarSelectionPage() {
+		if(grammarSelectionPage==null) {
+			grammarSelectionPage = new WizardNewJSonGrammarCreationPage(JSON_GRAMMAR_CREATION_PAGE_NAME, selection, jdtHelper);
+			addPage(grammarSelectionPage);
+		}
+	}
+	
+	public void addEPackageSelectionPage() {
+		if(ePackageSelectionPage==null) {
+			ePackageSelectionPage = new WizardSelectImportedEPackagePage(E_PACKAGE_CREATION_PAGE_NAME, selection, jdtHelper);  
+			addPage(ePackageSelectionPage);
+		}
+	}
+	
+
+	public WizardNewJSonGrammarCreationPage getGrammarSelectionPage() {
+		return grammarSelectionPage;
+	}
+	
+	public WizardSelectImportedEPackagePage getePackageSelectionPage() {
+		return ePackageSelectionPage;
+	}
+	
+	public void setGenModelSelection(URI genModelURI) {
+//		List<EPackageInfo> ePackageInfos = Lists.newArrayList();
+		addEPackageSelectionPage();
+		Collection<EPackageInfo> ePackageInfos = ePackageSelectionPage.getEPackageInfos();
+		EPackageChooserExtended ePackageChooser = new EPackageChooserExtended(getShell(), jdtHelper);
+		ePackageInfos.addAll(ePackageChooser.createEPackageInfosFromGenModel(genModelURI));
+	}
+
 }
