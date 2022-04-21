@@ -23,6 +23,7 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.codegen.ecore.genmodel.generator.GenBaseGeneratorAdapter;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -37,6 +38,8 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.wizards.IWizardDescriptor;
 
 import at.jku.bise.ecore.json.grammar.wizard.NewXtextProjectFromEcoreJsonGrammarWizard;
+import jsongrammar.DetailedGrammar;
+import jsongrammar.JsonGrammar;
 
 public class CreateLanguageHandler extends AbstractHandler{
 
@@ -55,7 +58,9 @@ public class CreateLanguageHandler extends AbstractHandler{
 	
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		// TODO Auto-generated method stub
+		
+		ResourceSet resourceSet = new ResourceSetImpl();
+		
 		TreeSelection treeSelection  = (TreeSelection)HandlerUtil.getCurrentSelectionChecked(event);
 		IFile selectedFile = (IFile) treeSelection.getFirstElement();
 		IPath fullPath = selectedFile.getFullPath(); 
@@ -75,9 +80,10 @@ public class CreateLanguageHandler extends AbstractHandler{
 		IWorkspace workspace= ResourcesPlugin.getWorkspace();    
 		IFile jsonGrammarFile = workspace.getRoot().getFile(jsonGrammarFilePath);
 		
-		GenModel genModel =generateGenmodelFile( workspace,  filename,  modelPath, rootProjectPath );
+		GenModel genModel =generateGenmodelFile( workspace,  filename,  modelPath, rootProjectPath, resourceSet );
 		generateSources(genModel);
 		URI genModelURI = genModel.eResource().getURI();
+		genModel.getEcoreGenPackage();//genModel.getEcoreGenPackage().eContents()
 		/**
 		 * https://stackoverflow.com/questions/27766267/eclipse-plugin-how-to-open-a-wizard-page-in-a-command-handler
 		 */
@@ -85,13 +91,25 @@ public class CreateLanguageHandler extends AbstractHandler{
 		NewXtextProjectFromEcoreJsonGrammarWizard wizard = createNewXtextProjectFromEcoreJsonGrammarWizard();
 		
 		WizardDialog dialog = new WizardDialog(activeShell, wizard);
+		wizard.setJsonGrammarFile(jsonGrammarFile);
 		wizard.setGenModelSelection(genModelURI);
+		
+		JsonGrammar jsonGrammar = loadJsonGrammar( jsonGrammarFile,  resourceSet);
+		DetailedGrammar detailedJsonGrammar = jsonGrammar.getDetailedGrammar();
+		EClass rootEClass = detailedJsonGrammar.getRootEClass();
+		
+		 
+		
 		/**
 		 * call the createPageControls
 		 */
 		dialog.create();
+		/**
+		 * we need first the create control to initialize the combo viewer of the root EClass
+		 */
+		wizard.setSetRootClass(rootEClass);
 //		wizard.addGrammarSelectionPage();
-		wizard.getGrammarSelectionPage().setJsonGrammarFile( jsonGrammarFile);
+//		wizard.getGrammarSelectionPage().setJsonGrammarFile( jsonGrammarFile);
 //		wizard.setGenModelSelection(genModelURI);
 //		wizard.getePackageSelectionPage();
 		dialog.open();
@@ -131,7 +149,7 @@ public class CreateLanguageHandler extends AbstractHandler{
 
 	}
 	
-	private GenModel generateGenmodelFile(IWorkspace workspace, String filename, IPath modelPath, IPath rootProjectPath ) {
+	private GenModel generateGenmodelFile(IWorkspace workspace, String filename, IPath modelPath, IPath rootProjectPath , ResourceSet resourceSet) {
 		String ecoreFileName = filename+ECORE_SUFFIX;
 //		String genmodelFileName = ecoreFileName+"."+GENMODEL_EXTENSION;
 		IPath ecoreFilePath = modelPath.append(ecoreFileName+"."+ECORE_EXTENSION);
@@ -140,7 +158,7 @@ public class CreateLanguageHandler extends AbstractHandler{
 		/**
 		 * https://spectrum.chat/emfcloud/general/get-epackage-of-ecore-file~97f19ba1-91a2-4a7d-ad33-ef06dfb7e52a
 		 */
-		ResourceSet resourceSet = new ResourceSetImpl();
+//		ResourceSet resourceSet = new ResourceSetImpl();
 		URI uri = URI.createURI(ecoreFilePath.toString());
 		Resource ecorePackageResource = resourceSet.getResource(uri, true);
 //		ecorePackageResource.
@@ -236,6 +254,23 @@ public class CreateLanguageHandler extends AbstractHandler{
 //		FileWriter fw = new FileWriter(fileName, true);
 //	    BufferedWriter bw = new BufferedWriter(fw);
 		 
+	}
+	
+	/**
+	 * Copied from Ecore2XtextJSONGrammarCreator.xtend
+	 * TODO move in a class Utils.
+	 * @param jsonGrammarFile
+	 * @param reset
+	 * @return
+	 */
+	private JsonGrammar loadJsonGrammar(IFile jsonGrammarFile, ResourceSet resourceSet) {
+		Resource resource = resourceSet.getResource(URI.createPlatformResourceURI(jsonGrammarFile.getFullPath().toString(), true), true);
+		if (resource.getContents().get(0) instanceof JsonGrammar) {
+			return (JsonGrammar) resource.getContents().get(0);
+		} else {
+			throw new IllegalArgumentException("Expecting JsonGrammar type of object");
+		}
+			
 	}
 	
 	/**

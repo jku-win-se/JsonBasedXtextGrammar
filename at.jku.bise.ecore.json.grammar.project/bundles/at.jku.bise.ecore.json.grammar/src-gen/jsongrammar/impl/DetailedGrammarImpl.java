@@ -7,13 +7,17 @@ import java.util.Collection;
 import jsongrammar.DetailedGrammar;
 import jsongrammar.JsongrammarPackage;
 
+import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
@@ -32,6 +36,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  *   <li>{@link jsongrammar.impl.DetailedGrammarImpl#getKeyValue <em>Key Value</em>}</li>
  *   <li>{@link jsongrammar.impl.DetailedGrammarImpl#getCurlyBracesEClass <em>Curly Braces EClass</em>}</li>
  *   <li>{@link jsongrammar.impl.DetailedGrammarImpl#getBracketsEClass <em>Brackets EClass</em>}</li>
+ *   <li>{@link jsongrammar.impl.DetailedGrammarImpl#getRootEClass <em>Root EClass</em>}</li>
  * </ul>
  *
  * @generated
@@ -96,6 +101,16 @@ public class DetailedGrammarImpl extends MinimalEObjectImpl.Container implements
 	 * @ordered
 	 */
 	protected EList<EClass> bracketsEClass;
+
+	/**
+	 * The cached value of the '{@link #getRootEClass() <em>Root EClass</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRootEClass()
+	 * @generated
+	 * @ordered
+	 */
+	protected EClass rootEClass;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -193,6 +208,44 @@ public class DetailedGrammarImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getRootEClass() {
+		if (rootEClass != null && rootEClass.eIsProxy()) {
+			InternalEObject oldRootEClass = (InternalEObject)rootEClass;
+			rootEClass = (EClass)eResolveProxy(oldRootEClass);
+			if (rootEClass != oldRootEClass) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, JsongrammarPackage.DETAILED_GRAMMAR__ROOT_ECLASS, oldRootEClass, rootEClass));
+			}
+		}
+		return rootEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass basicGetRootEClass() {
+		return rootEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRootEClass(EClass newRootEClass) {
+		EClass oldRootEClass = rootEClass;
+		rootEClass = newRootEClass;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, JsongrammarPackage.DETAILED_GRAMMAR__ROOT_ECLASS, oldRootEClass, rootEClass));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -208,6 +261,9 @@ public class DetailedGrammarImpl extends MinimalEObjectImpl.Container implements
 				return getCurlyBracesEClass();
 			case JsongrammarPackage.DETAILED_GRAMMAR__BRACKETS_ECLASS:
 				return getBracketsEClass();
+			case JsongrammarPackage.DETAILED_GRAMMAR__ROOT_ECLASS:
+				if (resolve) return getRootEClass();
+				return basicGetRootEClass();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -245,6 +301,9 @@ public class DetailedGrammarImpl extends MinimalEObjectImpl.Container implements
 				getBracketsEClass().clear();
 				getBracketsEClass().addAll((Collection<? extends EClass>)newValue);
 				return;
+			case JsongrammarPackage.DETAILED_GRAMMAR__ROOT_ECLASS:
+				setRootEClass((EClass)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -275,6 +334,9 @@ public class DetailedGrammarImpl extends MinimalEObjectImpl.Container implements
 			case JsongrammarPackage.DETAILED_GRAMMAR__BRACKETS_ECLASS:
 				getBracketsEClass().clear();
 				return;
+			case JsongrammarPackage.DETAILED_GRAMMAR__ROOT_ECLASS:
+				setRootEClass((EClass)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -299,6 +361,8 @@ public class DetailedGrammarImpl extends MinimalEObjectImpl.Container implements
 				return curlyBracesEClass != null && !curlyBracesEClass.isEmpty();
 			case JsongrammarPackage.DETAILED_GRAMMAR__BRACKETS_ECLASS:
 				return bracketsEClass != null && !bracketsEClass.isEmpty();
+			case JsongrammarPackage.DETAILED_GRAMMAR__ROOT_ECLASS:
+				return rootEClass != null;
 		}
 		return super.eIsSet(featureID);
 	}

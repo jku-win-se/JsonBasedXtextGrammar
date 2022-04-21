@@ -117,8 +117,9 @@ public class WizardNewJSonGrammarCreationPage extends WizardPage{
 				updateUI();
 			}
 		});
+		updateUI(); // added by Alessandro to make it work with jschema selection, so the the jsongrammar file can be filled before the dialog creation
 		setControl(composite);		
-		setPageComplete(false);
+//		setPageComplete(false); // added by Alessandro
 	}
 	
 	private void updateUI() {
@@ -137,6 +138,6 @@ public class WizardNewJSonGrammarCreationPage extends WizardPage{
 	
 	public void setJsonGrammarFile(IFile jsonGrammarFile) {
 		this.jsonGrammarFile = jsonGrammarFile;
-		updateUI();
+//		updateUI();
 	}
 }
