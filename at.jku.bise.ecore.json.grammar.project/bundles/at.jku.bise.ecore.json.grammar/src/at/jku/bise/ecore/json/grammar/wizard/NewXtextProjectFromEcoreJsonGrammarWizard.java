@@ -17,7 +17,9 @@ import org.eclipse.xtext.ui.wizard.IProjectInfo;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.EPackageChooser;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Messages;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.WizardSelectImportedEPackagePage;
+import org.eclipse.xtext.xtext.ui.wizard.project.AdvancedNewProjectPage;
 import org.eclipse.xtext.xtext.ui.wizard.project.NewXtextProjectWizard;
+import org.eclipse.xtext.xtext.ui.wizard.project.WizardNewXtextProjectCreationPage;
 import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectCreator;
 import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectInfo;
 import org.eclipse.xtext.xtext.wizard.EPackageInfo;
@@ -32,6 +34,8 @@ public class NewXtextProjectFromEcoreJsonGrammarWizard extends NewXtextProjectWi
 	
 	public static final String JSON_GRAMMAR_CREATION_PAGE_NAME ="Selection Custom JSON Grammar Specification";
 	public static final String E_PACKAGE_CREATION_PAGE_NAME = "ePackageSelectionPage";
+	public static final String MAIN_PAGE ="mainPage";
+	public static final String ADVANCED_PAGE = "advancedPage";
 	
 	
 //	private WizardSelectImportedEPackagePage ePackageSelectionPage  = null;
@@ -61,7 +65,9 @@ public class NewXtextProjectFromEcoreJsonGrammarWizard extends NewXtextProjectWi
 		addGrammarSelectionPage();
 //		addPage(ePackageSelectionPage); //$NON-NLS-1$	
 		addEPackageSelectionPage();
-		super.addPages();
+//		super.addPages();
+		addMainPage();
+		addAdvancedPage();
 	}
 
 	@Override
@@ -97,6 +103,26 @@ public class NewXtextProjectFromEcoreJsonGrammarWizard extends NewXtextProjectWi
 		}
 	}
 	
+	public void addMainPage() {
+//		WizardNewXtextProjectCreationPage mainPage = getMainPage();
+		WizardJsonGrammarNewXtextProjectCreationPage mainPage = getMainPage();
+		if(mainPage==null) {
+//			mainPage = new WizardNewXtextProjectCreationPage(MAIN_PAGE, this.selection); //$NON-NLS-1$
+			mainPage = new WizardJsonGrammarNewXtextProjectCreationPage(MAIN_PAGE, this.selection); //$NON-NLS-1$
+			addPage(mainPage);
+		}
+		//WizardJsonGrammarNewXtextProjectCreationPage
+	}
+	
+	public void addAdvancedPage() {
+		AdvancedNewProjectPage advancedPage = getAdvancedPage();
+		if(advancedPage==null) {
+			advancedPage = new AdvancedNewProjectPage(ADVANCED_PAGE);
+			addPage(advancedPage);
+		}
+	}
+	
+	// advancedPage = new AdvancedNewProjectPage("advancedPage");
 
 	public WizardNewJSonGrammarCreationPage getGrammarSelectionPage() {
 		return grammarSelectionPage;
@@ -129,6 +155,31 @@ public class NewXtextProjectFromEcoreJsonGrammarWizard extends NewXtextProjectWi
 //		 */
 //		ePackageSelectionPage.setRootElementComboViewer( rootElementComboViewer);
 		ePackageSelectionPage.setSetRootClass( rootEClass);
+	}
+	
+//	public WizardNewXtextProjectCreationPage getMainPage() {
+//		return (WizardNewXtextProjectCreationPage) getPage(MAIN_PAGE);
+//	}
+	
+	public WizardJsonGrammarNewXtextProjectCreationPage getMainPage() {
+		return (WizardJsonGrammarNewXtextProjectCreationPage) getPage(MAIN_PAGE);
+	}
+	
+//	WizardJsonGrammarNewXtextProjectCreationPage
+	public AdvancedNewProjectPage getAdvancedPage() {
+		return (AdvancedNewProjectPage) getPage(ADVANCED_PAGE);
+	}
+	
+	public void setInitialProjectName(String name) {
+		getMainPage().setInitialProjectName(name);
+	}
+	
+	public void setInitialLanguageNameField(String initialLanguageNameField) {
+		getMainPage().setInitialLanguageNameField(initialLanguageNameField);
+	}
+	
+	public void setInitialExtensionsField(String initialExtensionsField) {
+		getMainPage().setInitialExtensionsField(initialExtensionsField);
 	}
 
 }

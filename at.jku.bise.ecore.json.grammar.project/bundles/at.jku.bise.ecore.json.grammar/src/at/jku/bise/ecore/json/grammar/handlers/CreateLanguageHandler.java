@@ -75,6 +75,10 @@ public class CreateLanguageHandler extends AbstractHandler{
 		String filename = selectedFileNameWithExtension.substring(0, selectedFileNameWithExtension.lastIndexOf("."));
 		IPath rootProjectPath = fullPath.removeLastSegments(1);
 		IPath modelPath = rootProjectPath.append(MODEL_FOLDER);
+		
+		/**
+		 * discover jsongrammar file
+		 */
 		String jsonGrammarFileName = filename+"."+JSON_GRAMMAR_EXTENSION;
 		IPath jsonGrammarFilePath = modelPath.append(jsonGrammarFileName);
 		IWorkspace workspace= ResourcesPlugin.getWorkspace();    
@@ -93,10 +97,25 @@ public class CreateLanguageHandler extends AbstractHandler{
 		WizardDialog dialog = new WizardDialog(activeShell, wizard);
 		wizard.setJsonGrammarFile(jsonGrammarFile);
 		wizard.setGenModelSelection(genModelURI);
+		wizard.addMainPage();
+		/**
+		 * set project name
+		 */
+		String dotSepatatedPath = fullPath.toString().replace("/", ".");
+		String projectName = dotSepatatedPath.substring(1, dotSepatatedPath.lastIndexOf("."));
+		wizard.setInitialProjectName(projectName);
 		
-		JsonGrammar jsonGrammar = loadJsonGrammar( jsonGrammarFile,  resourceSet);
-		DetailedGrammar detailedJsonGrammar = jsonGrammar.getDetailedGrammar();
-		EClass rootEClass = detailedJsonGrammar.getRootEClass();
+		/**
+		 * Set Language Name
+		 */
+		String languageName = projectName+"."+toCamelCase(filename);
+		wizard.setInitialLanguageNameField(languageName);
+		/**
+		 * Set Language extension
+		 */
+		wizard.setInitialExtensionsField(filename);
+		
+		
 		
 		 
 		
@@ -104,14 +123,18 @@ public class CreateLanguageHandler extends AbstractHandler{
 		 * call the createPageControls
 		 */
 		dialog.create();
+		
 		/**
+		 * Set Root Class
 		 * we need first the create control to initialize the combo viewer of the root EClass
 		 */
+		JsonGrammar jsonGrammar = loadJsonGrammar( jsonGrammarFile,  resourceSet);
+		DetailedGrammar detailedJsonGrammar = jsonGrammar.getDetailedGrammar();
+		EClass rootEClass = detailedJsonGrammar.getRootEClass();
 		wizard.setSetRootClass(rootEClass);
-//		wizard.addGrammarSelectionPage();
-//		wizard.getGrammarSelectionPage().setJsonGrammarFile( jsonGrammarFile);
-//		wizard.setGenModelSelection(genModelURI);
-//		wizard.getePackageSelectionPage();
+		
+		
+
 		dialog.open();
 		
 		
