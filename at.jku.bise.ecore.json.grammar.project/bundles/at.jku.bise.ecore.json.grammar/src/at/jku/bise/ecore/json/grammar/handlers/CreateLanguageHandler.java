@@ -19,15 +19,18 @@ import org.eclipse.emf.codegen.ecore.generator.Generator;
 import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelFactory;
+import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.codegen.ecore.genmodel.generator.GenBaseGeneratorAdapter;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.converter.util.ConverterUtil;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.jface.viewers.TreeSelection;
@@ -59,7 +62,8 @@ public class CreateLanguageHandler extends AbstractHandler{
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		
-		ResourceSet resourceSet = new ResourceSetImpl();
+//		ResourceSet resourceSet = new ResourceSetImpl();
+		ResourceSet resourceSet = ConverterUtil.createResourceSet();
 		
 		TreeSelection treeSelection  = (TreeSelection)HandlerUtil.getCurrentSelectionChecked(event);
 		IFile selectedFile = (IFile) treeSelection.getFirstElement();
@@ -87,7 +91,8 @@ public class CreateLanguageHandler extends AbstractHandler{
 		GenModel genModel =generateGenmodelFile( workspace,  filename,  modelPath, rootProjectPath, resourceSet );
 		generateSources(genModel);
 		URI genModelURI = genModel.eResource().getURI();
-		genModel.getEcoreGenPackage();//genModel.getEcoreGenPackage().eContents()
+		
+		//genModel.getEcoreGenPackage();//genModel.getEcoreGenPackage().eContents()
 		/**
 		 * https://stackoverflow.com/questions/27766267/eclipse-plugin-how-to-open-a-wizard-page-in-a-command-handler
 		 */
@@ -181,10 +186,9 @@ public class CreateLanguageHandler extends AbstractHandler{
 		/**
 		 * https://spectrum.chat/emfcloud/general/get-epackage-of-ecore-file~97f19ba1-91a2-4a7d-ad33-ef06dfb7e52a
 		 */
-//		ResourceSet resourceSet = new ResourceSetImpl();
-		URI uri = URI.createURI(ecoreFilePath.toString());
+//		URI uri = URI.createURI(ecoreFilePath.toString());
+		URI uri = URI.createPlatformResourceURI(ecoreFilePath.toString(),true);
 		Resource ecorePackageResource = resourceSet.getResource(uri, true);
-//		ecorePackageResource.
 		EPackage ecorePackage = (EPackage)ecorePackageResource.getContents().get(0); 
 		/**
 		 * https://www.eclipse.org/forums/index.php?t=msg&th=513278&goto=1096737&#msg_1096737
@@ -201,35 +205,28 @@ public class CreateLanguageHandler extends AbstractHandler{
 		genModel.setRootExtendsClass("org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container");
 		genModel.setImporterID("org.eclipse.emf.importer.ecore");
 		
-//		String jsonMetaschemaMMNSUri = JsonMetaschemaMMPackage.eINSTANCE.getNsURI();
-//		String jsonMetaschemaMMNSUriGenModel = jsonMetaschemaMMNSUri.substring(0, jsonMetaschemaMMNSUri.lastIndexOf("."))+GENMODEL_EXTENSION;
-//		
-//		usedGenPackages="../../jsonmetaschemaMM/model/jsonMetaschemaMM.genmodel#//jsonMetaschemaMM"
-//		URI jsonMetaschemaMMGenmodelUri= URI.createURI("../../jsonmetaschemaMM/model/jsonMetaschemaMM.genmodel",true);
 		
-//		URI jsonMetaschemaMMEcoreURI = URI.createURI(jsonMetaschemaMM.Activator.getDefault().getBundle().getResource("model/jsonMetaschemaMM.ecore").toString());
-//		Resource jsonMetaschemaMMEcoreResource = resourceSet.getResource(jsonMetaschemaMMEcoreURI, true);
-		
-		URI jsonMetaschemaMMGenmodelURI = URI.createURI(jsonMetaschemaMM.Activator.getDefault().getBundle().getResource("model/jsonMetaschemaMM.genmodel").toString());
+//		URI jsonMetaschemaMMGenmodelURI = URI.createURI(jsonMetaschemaMM.Activator.getDefault().getBundle().getResource("model/jsonMetaschemaMM.genmodel").toString());
+//		URI jsonMetaschemaMMGenmodelURI = URI.createPlatformPluginURI(jsonMetaschemaMM.Activator.getDefault().getBundle().getResource("model/jsonMetaschemaMM.genmodel").toString(),true);
+//		URI jsonMetaschemaMMGenmodelURI  = URI.createURI("http://at.jku.bise/jsonMetaschemaMM");
+		/**
+		 * https://www.eclipse.org/forums/index.php/t/201509/
+		 */
+		//URI jsonMetaschemaMMGenmodelURI  = URI.createURI("http://at.jku.bise/jsonMetaschemaMM=platform:/resource/jsonmetaschemaMM/model/jsonMetaschemaMM.genmodel");
+//		URI jsonMetaschemaMMGenmodelURI = EcorePlugin.getEPackageNsURIToGenModelLocationMap(true).get("http://at.jku.bise/jsonMetaschemaMM");//.get(jsonMetaschemaMMGenmodelURI);
+//		URI jsonMetaschemaMMGenmodelURI =URI.createPlatformPluginURI("/jsonmetaschemaMM/model/jsonMetaschemaMM.genmodel",true);//resourceSet.getResource(URI.createPlatformPluginURI("/jsonmetaschemaMM/model/jsonMetaschemaMM.genmodel",true), true)
+//		resourceSet.getURIConverter().getURIMap().putAll(EcorePlugin.computePlatformURIMap(true));
+//		resourceSet.getResource(URI.createURI(JsonMetaschemaMMPackage.eINSTANCE.getNsURI()), true);
+//		URI jsonMetaschemaMMGenmodelURI =URI.createURI("http://at.jku.bise/jsonMetaschemaMM/model/jsonMetaschemaMM.genmodel");
+		URI jsonMetaschemaMMGenmodelURI =URI.createPlatformResourceURI("/jsonmetaschemaMM/model/jsonMetaschemaMM.genmodel",true);
 		Resource jsonMetaschemaMMGenmodelResource = resourceSet.getResource(jsonMetaschemaMMGenmodelURI, true);
-		List<GenPackage> jsonMetaschemaMMGenPackages = ((GenModel) jsonMetaschemaMMGenmodelResource.getContents().get(0)).getGenPackages();
+		
+		GenModel jsonMetaschemaMMGenmodel = (GenModel)EcoreUtil.getObjectByType(jsonMetaschemaMMGenmodelResource.getContents(), GenModelPackage.Literals.GEN_MODEL);
+		List<GenPackage> jsonMetaschemaMMGenPackages =jsonMetaschemaMMGenmodel.getGenPackages();
+//		List<GenPackage> jsonMetaschemaMMGenPackages = ((GenModel) jsonMetaschemaMMGenmodelResource.getContents().get(0)).getGenPackages();
 		genModel.getUsedGenPackages().addAll(jsonMetaschemaMMGenPackages);
 		
-//		IPath jsonMetaschemaMMGenmodelPath = new Path("../../jsonmetaschemaMM/model/jsonMetaschemaMM.genmodel");
-//		IFile jsonMetaschemaMMGenmodelFile = workspace.getRoot().getFile(jsonMetaschemaMMGenmodelPath);
-//		jsonMetaschemaMMGenmodelFile.getLocationURI();
-		
-		
-		 
 
-		
-		//genModel.getUsedGenPackages().addAll(genModel.computeMissingUsedGenPackages());
-		//genModel.getG
-//		EcorePlugin.computePlatformURIMap(true)	   ;
-		//		URI basicOclURI = URI.createURI(Activator.getDefault().getBundle().getResource("model/ocl/fullvalidation.ocl").toString());
-        
-//		EcoreUtil.
-//		
 		String packageName = ecorePackage.getName();
 //		String rootExtendsInterface = packageName.substring(0, 1).toUpperCase() + packageName.substring(1)+ROOT_EXTENDS_INTERFACE_SUFFIX;
 //		String rootExtendsInterface = toCamelCase(packageName)+ROOT_EXTENDS_INTERFACE_SUFFIX;
@@ -241,7 +238,8 @@ public class CreateLanguageHandler extends AbstractHandler{
 		genModel.setContainmentProxies(true);
 		
 		try {
-			URI genModelURI = URI.createFileURI(genmodelFilePath.toString());
+//			URI genModelURI = URI.createFileURI(genmodelFilePath.toString());
+			URI genModelURI = URI.createPlatformResourceURI(genmodelFilePath.toString(),true);
 			final XMIResourceImpl genModelResource = new XMIResourceImpl(genModelURI);
 			genModelResource.getDefaultSaveOptions().put(XMLResource.OPTION_ENCODING, GEN_MODEL_XML_ENCODING);
 			genModelResource.getContents().add(genModel);
@@ -306,7 +304,6 @@ public class CreateLanguageHandler extends AbstractHandler{
 	
 	private String toCamelCase (String str) {
 		return str.substring(0, 1).toUpperCase() + str.substring(1);
-		
 	}
 
 }
