@@ -1,5 +1,6 @@
 package at.jku.bise.ecore.json.grammar.wizard;
 
+import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Collection;
@@ -33,8 +34,11 @@ import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectLayout;
 import org.eclipse.xtext.xtext.wizard.RuntimeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.TestedProjectDescriptor;
+import org.osgi.framework.BundleException;
 
 import com.google.inject.Inject;
+
+import at.jku.bise.ecore.json.grammar.utils.ManifestChanger;
 
 
 //public class NewXtextProjectFromEcoreJsonGrammarWizard extends NewXtextProjectWizard {
@@ -50,6 +54,7 @@ public class NewXtextProjectFromEcoreJsonGrammarWizard extends XtextNewProjectWi
 	public static final String SPACE_OPEN_PARETHESIS= " (";
 	public static final String LANGUAGE_INFRASTRUCTURE = ") Language Infrastructure";
 	public static final String LAUNCH_EXTENSION ="launch";
+	public static final String OCL_BUNDLE = "org.eclipse.ocl.xtext.completeocl";
 	
 	private final IJdtHelper jdtHelper;
 	
@@ -258,6 +263,9 @@ public class NewXtextProjectFromEcoreJsonGrammarWizard extends XtextNewProjectWi
 		if(result) {
 			result = launchGenerateMwe2();
 		}
+		if(result) {
+			result = addOclDependency();
+		}
 		return result;
 	}	
 	
@@ -287,6 +295,34 @@ public class NewXtextProjectFromEcoreJsonGrammarWizard extends XtextNewProjectWi
 			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * https://www.eclipse.org/forums/index.php/t/109193/
+	 * https://rtist.hcldoc.com/help/index.jsp?topic=%2Forg.eclipse.platform.doc.isv%2Freference%2Fapi%2Forg%2Feclipse%2Fosgi%2Futil%2FManifestElement.html
+	 * @return
+	 */
+	private boolean  addOclDependency() {
+		try {
+			IPath manifestIPath = ResourcesPlugin.getWorkspace().getRoot().getProject(getProjectName()).getLocation().append("META-INF").append("MANIFEST");
+			manifestIPath=manifestIPath.addFileExtension("MF");
+		
+			ManifestChanger manifestChanger = new ManifestChanger(manifestIPath.toString());
+//			String oclVersion= Platform.getBundle("org.eclipse.ocl.xtext.completeocl").getVersion().toString();
+			manifestChanger.addPluginDependency(OCL_BUNDLE);
+			manifestChanger.writeManifest();
+//			InputStream in = new FileInputStream(manifestIPath.toString());
+//			Manifest manifest = new Manifest(in);//manifest.getMainAttributes().get("Require-Bundle"); Attributes.Name.
+			
+			return true;
+		} catch (BundleException e) {
+			e.printStackTrace();
+			return false;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
 	}
 
 }
