@@ -110,8 +110,8 @@ public class CreateLanguageHandler extends AbstractHandler{
 		/**
 		 * set project name
 		 */
-		String dotSepatatedPath = fullPath.toString().replace("/", ".");
-		String projectName = dotSepatatedPath.substring(1, dotSepatatedPath.lastIndexOf("."));
+		String dotSeparatedPath = fullPath.toString().replace("/", "."); // TODO use "/|\"
+		String projectName = dotSeparatedPath.substring(1, dotSeparatedPath.lastIndexOf("."));
 		wizard.setInitialProjectName(projectName);
 		
 		/**

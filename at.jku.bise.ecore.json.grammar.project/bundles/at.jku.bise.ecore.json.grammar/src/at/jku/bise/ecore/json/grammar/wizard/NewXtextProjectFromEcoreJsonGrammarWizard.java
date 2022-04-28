@@ -1,45 +1,39 @@
 package at.jku.bise.ecore.json.grammar.wizard;
 
-import java.lang.reflect.Field;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.preferences.InstanceScope;
+import org.eclipse.debug.core.ILaunchManager;
+import org.eclipse.debug.ui.DebugUITools;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.jface.viewers.ComboViewer;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.xtext.ui.util.IJdtHelper;
 import org.eclipse.xtext.ui.wizard.IProjectInfo;
 import org.eclipse.xtext.ui.wizard.XtextNewProjectWizard;
 import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xtext.ui.Activator;
-import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.EPackageChooser;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Messages;
-import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.WizardSelectImportedEPackagePage;
-import org.eclipse.xtext.xtext.ui.wizard.project.AdvancedNewProjectPage;
-import org.eclipse.xtext.xtext.ui.wizard.project.NewXtextProjectWizard;
-import org.eclipse.xtext.xtext.ui.wizard.project.WizardNewXtextProjectCreationPage;
 import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectCreator;
-import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectInfo;
 import org.eclipse.xtext.xtext.wizard.BuildSystem;
 import org.eclipse.xtext.xtext.wizard.EPackageInfo;
 import org.eclipse.xtext.xtext.wizard.Ecore2XtextConfiguration;
 import org.eclipse.xtext.xtext.wizard.LanguageDescriptor;
+import org.eclipse.xtext.xtext.wizard.LanguageDescriptor.FileExtensions;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectLayout;
 import org.eclipse.xtext.xtext.wizard.RuntimeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.TestedProjectDescriptor;
-import org.eclipse.xtext.xtext.wizard.LanguageDescriptor.FileExtensions;
 
-import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 
@@ -50,6 +44,12 @@ public class NewXtextProjectFromEcoreJsonGrammarWizard extends XtextNewProjectWi
 	public static final String E_PACKAGE_CREATION_PAGE_NAME = "ePackageSelectionPage";
 	public static final String MAIN_PAGE ="mainPage";
 	public static final String ADVANCED_PAGE = "advancedPage";
+	public static final String GENERATE = "Generate";
+	public static final String DOT_PARENT =".parent";
+	public static final String LAUNCH_FOLDER=".launch";
+	public static final String SPACE_OPEN_PARETHESIS= " (";
+	public static final String LANGUAGE_INFRASTRUCTURE = ") Language Infrastructure";
+	public static final String LAUNCH_EXTENSION ="launch";
 	
 	private final IJdtHelper jdtHelper;
 	
@@ -244,6 +244,49 @@ public class NewXtextProjectFromEcoreJsonGrammarWizard extends XtextNewProjectWi
 		getMainPage().setInitialExtensionsField(initialExtensionsField);
 	}
 	
+	public String getProjectName() {
+		return this.mainPage.getProjectName();
+	}
+	
+	public String getLanguageName() {
+		return this.mainPage.getLanguageName();
+	}
 	 
+	@Override
+	public boolean performFinish() {
+		boolean result = super.performFinish();
+		if(result) {
+			result = launchGenerateMwe2();
+		}
+		return result;
+	}	
+	
+	
+	private boolean  launchGenerateMwe2() {
+		try {
+			String projectName = getProjectName();
+			String languageName =getLanguageName();
+			String languageFromLastDot = languageName.substring(languageName.lastIndexOf(".")+1);
+			IPath mwe2Path = new Path("/"); 
+			mwe2Path = mwe2Path.append(projectName+DOT_PARENT).append(projectName).append(LAUNCH_FOLDER);
+			
+			mwe2Path= mwe2Path.append(GENERATE+" "+languageFromLastDot+SPACE_OPEN_PARETHESIS+mainPage.getFileExtensions()+LANGUAGE_INFRASTRUCTURE);
+			mwe2Path= mwe2Path.addFileExtension(LAUNCH_EXTENSION);
+			IWorkspace workspace= ResourcesPlugin.getWorkspace();  
+			IFile launchFile = workspace.getRoot().getFile(mwe2Path); 
+			try {
+				launchFile.refreshLocal(IResource.DEPTH_INFINITE, null);
+			} catch (CoreException e) {
+				e.printStackTrace();
+				return false;
+			}
+			IFileLaunchConfiguration launchConfiguration = new IFileLaunchConfiguration(launchFile); //workspace.getRoot().getFile(((IPath)new Path("//")).append(mwe2Path))
+			DebugUITools.launch(launchConfiguration, ILaunchManager.RUN_MODE, false);
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 
 }
