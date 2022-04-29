@@ -52,6 +52,7 @@ public class CreateLanguageHandler extends AbstractHandler{
 
 	public final static String JSCHEMA_EXTENSION = "jschema";
 	public final static String JSON_GRAMMAR_EXTENSION = "jsongrammar";
+	public final static String OCL_EXTENSION = "ocl";
 	public final static String ECORE_SUFFIX= "Opt";
 	public final static String ECORE_EXTENSION = "ecore";
 	public final static String GENMODEL_EXTENSION = "genmodel";
@@ -71,17 +72,17 @@ public class CreateLanguageHandler extends AbstractHandler{
 		
 		TreeSelection treeSelection  = (TreeSelection)HandlerUtil.getCurrentSelectionChecked(event);
 		IFile selectedFile = (IFile) treeSelection.getFirstElement();
-		IPath fullPath = selectedFile.getFullPath(); 
-		if(!JSCHEMA_EXTENSION.equals(fullPath.getFileExtension())) { 
+		IPath jschemaFullPath = selectedFile.getFullPath(); 
+		if(!JSCHEMA_EXTENSION.equals(jschemaFullPath.getFileExtension())) { 
 			throw new ExecutionException("selected file extension must be "+JSCHEMA_EXTENSION);
 		}
-		String[] pathSegments = fullPath.segments();
-		String selectedFileNameWithExtension = fullPath.lastSegment();
+//		String[] pathSegments = fullPath.segments();
+		String selectedFileNameWithExtension = jschemaFullPath.lastSegment();
 		/**
 		 * name of the file without path and extension
 		 */
 		String filename = selectedFileNameWithExtension.substring(0, selectedFileNameWithExtension.lastIndexOf("."));
-		IPath rootProjectPath = fullPath.removeLastSegments(1);
+		IPath rootProjectPath = jschemaFullPath.removeLastSegments(1);
 		IPath modelPath = rootProjectPath.append(MODEL_FOLDER);
 		
 		/**
@@ -92,10 +93,19 @@ public class CreateLanguageHandler extends AbstractHandler{
 		IWorkspace workspace= ResourcesPlugin.getWorkspace();    
 		IFile jsonGrammarFile = workspace.getRoot().getFile(jsonGrammarFilePath);
 		
+		/**
+		 * genmodel and source generation. genmodel selection after creation
+		 */
 		GenModel genModel =generateGenmodelFile( workspace,  filename,  modelPath, rootProjectPath, resourceSet );
 		generateSources(genModel);
 		URI genModelURI = genModel.eResource().getURI();
 		
+		/**
+		 * ocl selection
+		 * TODO modify oclPath when the OCL will be in model folder
+		 */
+		IPath oclPath = rootProjectPath.append(filename+ECORE_SUFFIX).addFileExtension(OCL_EXTENSION);
+		IFile oclFile = workspace.getRoot().getFile(oclPath);//oclFile.exists()
 		//genModel.getEcoreGenPackage();//genModel.getEcoreGenPackage().eContents()
 		/**
 		 * https://stackoverflow.com/questions/27766267/eclipse-plugin-how-to-open-a-wizard-page-in-a-command-handler
@@ -106,11 +116,12 @@ public class CreateLanguageHandler extends AbstractHandler{
 		WizardDialog dialog = new WizardDialog(activeShell, wizard);
 		wizard.setJsonGrammarFile(jsonGrammarFile);
 		wizard.setGenModelSelection(genModelURI);
+		wizard.setOclFile(oclFile);
 		wizard.addMainPage();
 		/**
 		 * set project name
 		 */
-		String dotSeparatedPath = fullPath.toString().replace("/", "."); // TODO use "/|\"
+		String dotSeparatedPath = jschemaFullPath.toString().replace("/", "."); // TODO use "/|\"
 		String projectName = dotSeparatedPath.substring(1, dotSeparatedPath.lastIndexOf("."));
 		wizard.setInitialProjectName(projectName);
 		

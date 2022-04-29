@@ -48,6 +48,7 @@ public class NewXtextProjectFromEcoreJsonGrammarWizard extends XtextNewProjectWi
 	public static final String E_PACKAGE_CREATION_PAGE_NAME = "ePackageSelectionPage";
 	public static final String MAIN_PAGE ="mainPage";
 	public static final String ADVANCED_PAGE = "advancedPage";
+	public static final String OCL_PAGE_NAME ="Selection OCL File";
 	public static final String GENERATE = "Generate";
 	public static final String DOT_PARENT =".parent";
 	public static final String LAUNCH_FOLDER=".launch";
@@ -59,12 +60,9 @@ public class NewXtextProjectFromEcoreJsonGrammarWizard extends XtextNewProjectWi
 	private final IJdtHelper jdtHelper;
 	
 //	private WizardSelectImportedEPackagePage ePackageSelectionPage  = null;
-	private WizardJsonGrammarSelectImportedEPackagePage ePackageSelectionPage  = null;
-	
-
-
-	
 	private WizardNewJSonGrammarCreationPage grammarSelectionPage = null;
+	private WizardJsonGrammarSelectImportedEPackagePage ePackageSelectionPage  = null;
+	private WizardOclCreationPage oclSelectionPage= null;
 	private WizardJsonGrammarNewXtextProjectCreationPage mainPage = null;
 	private AdvancedJsonGrammarNewProjectPage advancedPage = null;
 
@@ -88,6 +86,7 @@ public class NewXtextProjectFromEcoreJsonGrammarWizard extends XtextNewProjectWi
 		addGrammarSelectionPage();
 //		addPage(ePackageSelectionPage); //$NON-NLS-1$	
 		addEPackageSelectionPage();
+		addOclSelectionPage();
 //		super.addPages();
 		addMainPage();
 		addAdvancedPage();
@@ -178,6 +177,15 @@ public class NewXtextProjectFromEcoreJsonGrammarWizard extends XtextNewProjectWi
 		}
 	}
 	
+	
+	
+	public void addOclSelectionPage() {
+		if(oclSelectionPage==null) {
+			oclSelectionPage = new WizardOclCreationPage(OCL_PAGE_NAME, selection, jdtHelper);
+			addPage(oclSelectionPage);
+		}
+	}
+	
 	public void addMainPage() {
 //		WizardNewXtextProjectCreationPage mainPage = getMainPage();
 		WizardJsonGrammarNewXtextProjectCreationPage mainPage = getMainPage();
@@ -216,6 +224,11 @@ public class NewXtextProjectFromEcoreJsonGrammarWizard extends XtextNewProjectWi
 		Collection<EPackageInfo> ePackageInfos = ePackageSelectionPage.getEPackageInfos();
 		EPackageChooserExtended ePackageChooser = new EPackageChooserExtended(getShell(), jdtHelper);
 		ePackageInfos.addAll(ePackageChooser.createEPackageInfosFromGenModel(genModelURI));
+	}
+	
+	public void setOclFile(IFile oclFile) {
+		addOclSelectionPage();
+		oclSelectionPage.setOclFile(oclFile);
 	}
 	
 	public void setSetRootClass(EClass rootEClass) {
