@@ -277,7 +277,8 @@ public class CreateLanguageHandler extends AbstractHandler{
 //		genModel.setRootExtendsInterface(rootExtendsInterface);
 		genModel.initialize(Collections.singleton(ecorePackage));
 		GenPackage genPackage = (GenPackage)genModel.getGenPackages().get(0);
-		genPackage.setPrefix(packageName);
+		//genPackage.setPrefix(packageName);
+		genPackage.setPrefix(toCamelCase(packageName));
 		
 		genModel.setContainmentProxies(true);
 		
@@ -308,7 +309,7 @@ public class CreateLanguageHandler extends AbstractHandler{
 	 * @param genModel
 	 */
 	private void generateSources(GenModel genModel) {
-		genModel.reconcile(); // this does nothing!!! attempt to reconcile
+		//genModel.reconcile(); // this does nothing!!! attempt to reconcile
 		genModel.setCanGenerate(true);//genModel.get
 		Generator generator = new Generator(); // GenBase
 //		genModel.getModelBundleName()
