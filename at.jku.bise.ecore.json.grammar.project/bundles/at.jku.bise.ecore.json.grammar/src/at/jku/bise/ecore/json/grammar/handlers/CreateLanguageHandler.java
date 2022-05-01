@@ -39,6 +39,14 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.jface.wizard.WizardDialog;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CLabel;
+import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
@@ -66,7 +74,9 @@ public class CreateLanguageHandler extends AbstractHandler{
 	
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		
+		Shell shell = createShell();
+		shell.open();
+		shell.layout();
 //		ResourceSet resourceSet = new ResourceSetImpl();
 		ResourceSet resourceSet = ConverterUtil.createResourceSet();
 		
@@ -110,6 +120,7 @@ public class CreateLanguageHandler extends AbstractHandler{
 		/**
 		 * https://stackoverflow.com/questions/27766267/eclipse-plugin-how-to-open-a-wizard-page-in-a-command-handler
 		 */
+		shell.close(); // we have to close here otherwise it would be the active shell
 		Shell activeShell = HandlerUtil.getActiveShell(event);
 		NewXtextProjectFromEcoreJsonGrammarWizard wizard = createNewXtextProjectFromEcoreJsonGrammarWizard();
 		
@@ -154,7 +165,7 @@ public class CreateLanguageHandler extends AbstractHandler{
 		wizard.setSetRootClass(rootEClass);
 		
 		
-
+		
 		dialog.open();
 		
 		
@@ -309,6 +320,8 @@ public class CreateLanguageHandler extends AbstractHandler{
 	 * @param genModel
 	 */
 	private void generateSources(GenModel genModel) {
+		
+		
 		//genModel.reconcile(); // this does nothing!!! attempt to reconcile
 		genModel.setCanGenerate(true);//genModel.get
 		Generator generator = new Generator(); // GenBase
@@ -317,10 +330,8 @@ public class CreateLanguageHandler extends AbstractHandler{
 		generator.generate(genModel,GenBaseGeneratorAdapter.MODEL_PROJECT_TYPE, new BasicMonitor.Printing(System.err));
 		generator.generate(genModel, GenBaseGeneratorAdapter.EDIT_PROJECT_TYPE,  new BasicMonitor.Printing(System.err));
 		generator.generate(genModel, GenBaseGeneratorAdapter.EDITOR_PROJECT_TYPE, new BasicMonitor.Printing(System.err));
-//		genModel.getEd
-//		FileWriter fw = new FileWriter(fileName, true);
-//	    BufferedWriter bw = new BufferedWriter(fw);
-		 
+		
+		
 	}
 	
 	/**
@@ -338,6 +349,48 @@ public class CreateLanguageHandler extends AbstractHandler{
 			throw new IllegalArgumentException("Expecting JsonGrammar type of object");
 		}
 			
+	}
+	
+	/**
+	 * http://www.java2s.com/Code/Java/SWT-JFace-Eclipse/Aprogressbardialog.htm
+	 * @return
+	 */
+	private Shell createShell() {
+		Shell shell = new Shell(SWT.TITLE | SWT.PRIMARY_MODAL);
+		final GridLayout gridLayout = new GridLayout();
+        gridLayout.verticalSpacing = 10;
+
+        shell.setLayout(gridLayout);
+        shell.setSize(483, 181);
+        shell.setText("Progress...");
+        
+        final Composite composite = new Composite(shell, SWT.NONE);
+        composite.setLayoutData(new GridData(GridData.FILL, GridData.CENTER, true, false));
+        composite.setLayout(new GridLayout());
+        
+        CLabel message = new CLabel(composite, SWT.NONE);
+//        message.setImage(processImage);
+        message.setLayoutData(new GridData(GridData.FILL, GridData.CENTER, true, false));
+        message.setText("process......");
+        
+        Composite progressBarComposite =  new Composite(shell, SWT.NONE);
+        progressBarComposite.setLayoutData(new GridData(GridData.FILL,
+                GridData.CENTER, false, false));
+        progressBarComposite.setLayout(new FillLayout());
+        
+        ProgressBar progressBar = new ProgressBar(progressBarComposite, SWT.SMOOTH);
+        progressBar.setMaximum(5);
+        
+        Label processMessageLabel = new Label(shell, SWT.NONE);
+        processMessageLabel.setLayoutData(new GridData(GridData.FILL, GridData.CENTER, false, false));
+        Label lineLabel = new Label(shell, SWT.HORIZONTAL | SWT.SEPARATOR);
+        lineLabel.setLayoutData(new GridData(GridData.FILL, GridData.CENTER, false, false));
+//		ProgressBar progressBar = new ProgressBar(shell,  SWT.SMOOTH);
+//		progressBar.setBounds(100, 10, 200, 20);
+        return shell;
+//		shell.open();
+//		shell.layout();
+		 
 	}
 	
 	/**
