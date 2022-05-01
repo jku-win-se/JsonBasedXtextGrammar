@@ -1,5 +1,6 @@
 package at.jku.bise.ecore.json.grammar.wizard;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Arrays;
@@ -14,7 +15,9 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.debug.core.ILaunchManager;
+import org.eclipse.debug.internal.ui.DebugUIPlugin;
 import org.eclipse.debug.ui.DebugUITools;
+import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.ui.util.IJdtHelper;
@@ -56,6 +59,9 @@ public class NewXtextProjectFromEcoreJsonGrammarWizard extends XtextNewProjectWi
 	public static final String LANGUAGE_INFRASTRUCTURE = ") Language Infrastructure";
 	public static final String LAUNCH_EXTENSION ="launch";
 	public static final String OCL_BUNDLE = "org.eclipse.ocl.xtext.completeocl";
+	public static final String SOURCE_FOLDER="src";
+	public static final String VALIDATION_FOLDER="validation";
+	public static final String VALIDATOR_CLASS_SUFFIX="Validator";
 	
 	private final IJdtHelper jdtHelper;
 	
@@ -273,11 +279,15 @@ public class NewXtextProjectFromEcoreJsonGrammarWizard extends XtextNewProjectWi
 	@Override
 	public boolean performFinish() {
 		boolean result = super.performFinish();
-		if(result) {
-			result = launchGenerateMwe2();
-		}
+		
 		if(result) {
 			result = addOclDependency();
+		}
+		if(result) {
+			result =generateOclValidator();
+		}
+		if(result) {
+			result = launchGenerateMwe2();
 		}
 		return result;
 	}	
@@ -303,10 +313,13 @@ public class NewXtextProjectFromEcoreJsonGrammarWizard extends XtextNewProjectWi
 			}
 			IFileLaunchConfiguration launchConfiguration = new IFileLaunchConfiguration(launchFile); //workspace.getRoot().getFile(((IPath)new Path("//")).append(mwe2Path))
 			DebugUITools.launch(launchConfiguration, ILaunchManager.RUN_MODE, false);
+//			DebugUIPlugin.launchInForeground(launchConfiguration, ILaunchManager.RUN_MODE);
+//			launchConfiguration.launch(ILaunchManager.RUN_MODE, null);
+			 
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 			return false;
-		}
+		} 
 		return true;
 	}
 
@@ -337,5 +350,52 @@ public class NewXtextProjectFromEcoreJsonGrammarWizard extends XtextNewProjectWi
 		}
 		
 	}
+	
+	private boolean generateOclValidator() {
+		try {
+			String projectName = getProjectName();
+			String languageToLastDot = getLanguageToLastDot();
+			String languageFromLastDot = getLanguageFromLastDot();
+//			IPath validationFilePath = new Path("/"); 
+			IPath validationFilePath = ResourcesPlugin.getWorkspace().getRoot().getLocation(); 
+			validationFilePath = validationFilePath.append(projectName+DOT_PARENT).append(projectName).append(SOURCE_FOLDER);
+			
+			String classPackage = languageToLastDot+"."+VALIDATION_FOLDER;
+			String className = languageFromLastDot+VALIDATOR_CLASS_SUFFIX;
+			
+			String[] classPackageSplit = classPackage.split("\\.");
+			for (String split :classPackageSplit) {
+				validationFilePath = validationFilePath.append(split);
+			}
+			File validationDirectory =validationFilePath.toFile();
+			if(!validationDirectory.exists()) {
+				validationDirectory.mkdir();
+				
+			}
+			validationFilePath = validationFilePath.append(className).addFileExtension("java");
+			
+			String fileName = validationFilePath.toString(); 
+			
+			String modelPackage = this.ePackageSelectionPage.getEPackageInfos().iterator().next().getEPackageJavaFQN();
+			String oclPath = this.oclSelectionPage.getOclFile().getFullPath().toString();
+			
+			OclValidatorGenerator.create(fileName, classPackage, className, modelPackage, oclPath);
+			return true;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
 
+	private String getLanguageToLastDot(){
+		String languageName =getLanguageName();
+		String languageToLastDot = languageName.substring(0,languageName.lastIndexOf("."));
+		return languageToLastDot;
+	}
+	private String getLanguageFromLastDot(){
+		String languageName =getLanguageName();
+		String languageFromLastDot = languageName.substring(languageName.lastIndexOf(".")+1);
+		return languageFromLastDot;
+	}
 }
