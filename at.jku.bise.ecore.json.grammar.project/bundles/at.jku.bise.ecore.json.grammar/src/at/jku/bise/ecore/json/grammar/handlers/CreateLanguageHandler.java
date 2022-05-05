@@ -291,7 +291,7 @@ public class CreateLanguageHandler extends AbstractHandler{
 		//genPackage.setPrefix(packageName);
 		genPackage.setPrefix(toCamelCase(packageName));
 		
-		genModel.setContainmentProxies(true);
+//		genModel.setContainmentProxies(true); this line has been commented out because responsible of the issue DML-260. It makes the xedit editor to crash with a StackOverflowError https://alessandrocolantoni.atlassian.net/jira/software/c/projects/DML/boards/3?selectedIssue=DML-260
 		
 		try {
 //			URI genModelURI = URI.createFileURI(genmodelFilePath.toString());
@@ -322,7 +322,7 @@ public class CreateLanguageHandler extends AbstractHandler{
 	private void generateSources(GenModel genModel) {
 		
 		
-		//genModel.reconcile(); // this does nothing!!! attempt to reconcile
+//		genModel.reconcile(); // this does nothing!!! attempt to reconcile
 		genModel.setCanGenerate(true);//genModel.get
 		Generator generator = new Generator(); // GenBase
 //		genModel.getModelBundleName()
