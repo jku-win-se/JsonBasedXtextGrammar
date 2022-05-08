@@ -49,6 +49,14 @@ class Ecore2XtextJSONGrammarCreator {
 				«rule(it)»
 			«ENDFOR»
 			
+			«overwriteINT»
+			
+			«overwriteSTRING()»
+			
+			«writeTerminalE_INT»
+			
+			«writeTerminalE_DOUBLE»
+			
 		'''
 	}
 	
@@ -145,7 +153,7 @@ class Ecore2XtextJSONGrammarCreator {
 				if (it.serializable) {
 				'''
 						«uniqueName» returns «fqn»:
-							«it.dataTypeRuleBody»;
+							«it.jsonDataTypeRuleBody»;
 					'''
 				}
 			
@@ -153,6 +161,24 @@ class Ecore2XtextJSONGrammarCreator {
 				throw new IllegalStateException("No rule template for "+it)
 		}
 	}	
+	
+	def static String jsonDataTypeRuleBody(EDataType it) {
+		switch (name) {
+			case 'EString': 'STRING'
+			case 'EDouble': 'E_INT | E_DOUBLE'
+			case 'EInt': 'E_INT'
+			default : it.dataTypeRuleBody
+		};
+//		if('EString'.equals(name)){
+//			'STRING'
+//		}else if('EDouble'.equals(name)){
+//			
+//		}else{
+//			it.dataTypeRuleBody
+//		}
+		
+		
+	}
 	
 	def jsonSeparator(EStructuralFeature it) {
 		'''«"'"»:«"'"»'''		
@@ -257,4 +283,45 @@ class Ecore2XtextJSONGrammarCreator {
 		} else
 			throw new IllegalArgumentException("Expecting JsonGrammar type of object");
 	 }
+	 
+	def overwriteINT(){
+		'''
+		/**
+		 * In JSON the first digit of an integer can not be 0, unless it is 0 itself.
+		 */
+		@Override 
+		terminal INT returns ecore::EInt: 
+			('0' |  (('1'..'9') ('0'..'9')*))
+		;
+		'''
+	} 	 
+	
+	def overwriteSTRING(){
+		'''
+		/**
+		 * In JSON the single quote for String is not admitted
+		 */
+		@Override 
+		terminal STRING:
+			'"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"'
+		;	
+		
+		'''
+	}
+	
+	def writeTerminalE_INT(){
+		'''
+		terminal E_INT :
+			'-'? INT;
+		
+		'''
+	}
+	def writeTerminalE_DOUBLE(){
+		'''
+		terminal E_DOUBLE :
+			'-'? INT ('.' INT+)? (('E'|'e') ('+'|'-')? INT)?
+		;
+		
+		'''
+	}
 }
