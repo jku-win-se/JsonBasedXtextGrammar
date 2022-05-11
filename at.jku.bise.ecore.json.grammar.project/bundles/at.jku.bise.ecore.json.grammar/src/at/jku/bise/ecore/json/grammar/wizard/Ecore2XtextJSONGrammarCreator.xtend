@@ -2,9 +2,8 @@ package at.jku.bise.ecore.json.grammar.wizard
 
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration
 import org.eclipse.emf.ecore.EClassifier
-import static extension org.eclipse.xtext.xtext.wizard.ecore2xtext.Ecore2XtextExtensions.*
+//import static extension org.eclipse.xtext.xtext.wizard.ecore2xtext.Ecore2XtextExtensions.*
 import static extension org.eclipse.xtext.xtext.wizard.ecore2xtext.UniqueNameUtil.*
-import static extension at.jku.bise.ecore.json.grammar.ui.utils.Ecore2XtextJSONExtensions.*;
 import org.eclipse.emf.ecore.EClass
 import java.util.List
 import org.eclipse.emf.ecore.EStructuralFeature
@@ -19,10 +18,16 @@ import org.eclipse.core.resources.IFile
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.BaseInternalContentAssistParser.IFollowElementFactory
+import java.util.ArrayList
+import org.eclipse.emf.ecore.EAnnotation
+import java.util.Set
+import java.util.HashSet
+import static extension at.jku.bise.ecore.json.grammar.ui.utils.Ecore2XtextJSONExtensions.*
 
 class Ecore2XtextJSONGrammarCreator {
 	
 	DetailedGrammar detailedJsonGrammar = null;
+	Set<String> keywords = new HashSet<String>();
 	
 	def grammar(WizardConfiguration config) {
 		val it = config.ecore2Xtext
@@ -51,9 +56,13 @@ class Ecore2XtextJSONGrammarCreator {
 			
 			«overwriteINT»
 			
+			«writeVALID_STRING»
+			
 			«overwriteSTRING()»
 			
 			«writeTerminalE_INT»
+			
+			«writeKeywords»
 			
 			«writeTerminalE_DOUBLE»
 			
@@ -74,11 +83,93 @@ class Ecore2XtextJSONGrammarCreator {
 			«ENDIF»
 		'''
 	}
-	
+	/**
+	 * TODO work here with subclasses(eClazz) to have a list oredered as (1)Properties, (2) PatternProperties, (3) AdditionalProperties 
+	 */
 	def subClassAlternatives(EClass eClazz) {
-		var list = newArrayList(eClazz)+subClasses(eClazz)
-		list=list.filter([c|needsConcreteRule(c)])
-		list.map([concreteRuleName]).join(" | ")
+		var list = newArrayList(eClazz)+subClasses(eClazz);
+		list = orderedSubClasses(list);
+		list=list.filter([c|needsConcreteRule(c)]);
+		list.map([
+			if(needsSyntacticPredicate){
+				"=>" + concreteRuleName
+			}else{
+				concreteRuleName
+			}
+		]).join(" | ")
+		
+//		if(list.exists[c|needsSyntacticPredicate(c)]){
+//			list = orderedSubClasses(list)
+//			list=list.filter([c|needsConcreteRule(c)])
+//			list.map([
+//				if(needsSyntacticPredicate){
+//					"=>" + concreteRuleName
+//				}else{
+//					concreteRuleName
+//				}
+//			]).join(" | ")
+//		}else{
+//			list=list.filter([c|needsConcreteRule(c)])
+//			list.map([concreteRuleName]).join(" | ")
+//		}
+	}
+	
+	def needsSyntacticPredicate(EClass eClazz){
+//		eClazz.EAnnotations.exists[annotation|annotation.details.containsKey('AdditionalProperties') || annotation.details.containsKey('PatternProperties')]
+		isAdditionalProperty(eClazz) || isPatternProperty(eClazz) || isIntegerInArrayOfTypes(eClazz)
+	}
+	
+	/**
+	 * An Integer in an Array Of Types could generate an ambiguous grammar if there is also a Number 
+	 */
+	def isIntegerInArrayOfTypes(EClass eClazz){
+		eClazz.EAnnotations.exists[annotation | annotation.details.get("ArrayOfTypes").equals("integer")]
+	}
+	
+	def isAdditionalProperty(EClass eClazz){
+		eClazz.EAnnotations.exists[annotation | annotation.details.containsKey('AdditionalProperties')]
+	}
+	def isPatternProperty(EClass eClazz){
+		eClazz.EAnnotations.exists[annotation | annotation.details.containsKey('PatternProperties')]
+	}
+	
+	
+	def orderedSubClasses(Iterable<EClass> alternativeEClasses){
+		var propertiesEClasses = new ArrayList<EClass>();
+		var patternPropertiesEClasses = new ArrayList<EClass>();
+		var EClass additionalPropertiesEClass =null;
+		var orderedSubClasses = new ArrayList<EClass>();
+		for (eClass : alternativeEClasses){
+			var boolean isPatternOrAdditionalProperty = false;
+			if(!isPatternOrAdditionalProperty){
+				if(isAdditionalProperty(eClass)){
+					isPatternOrAdditionalProperty=true
+					additionalPropertiesEClass=eClass;
+				}else if (isPatternProperty(eClass)){
+					isPatternOrAdditionalProperty=true;
+					patternPropertiesEClasses.add(eClass);
+				}
+//				for (eAnnotation : eClass.EAnnotations){
+//					if (eAnnotation.details.containsKey('AdditionalProperties')){
+//						isPatternOrAdditionalProperty=true
+//						additionalPropertiesEClass=eClass;
+//						
+//					}else if(eAnnotation.details.containsKey('PatternProperties')){
+//						isPatternOrAdditionalProperty=true;
+//						patternPropertiesEClasses.add(eClass);
+//					}
+//				}
+			}
+			if(!isPatternOrAdditionalProperty){
+				propertiesEClasses.add(eClass);
+			}
+		}
+		orderedSubClasses.addAll(propertiesEClasses);
+		orderedSubClasses.addAll(patternPropertiesEClasses);
+		if(additionalPropertiesEClass !== null){
+			orderedSubClasses.add(additionalPropertiesEClass);
+		}
+		orderedSubClasses
 	}
 	
 	def assigment(EStructuralFeature it) {
@@ -121,6 +212,21 @@ class Ecore2XtextJSONGrammarCreator {
 		}
 	}
 	
+//	def orderByKeyValue(Iterable<EStructuralFeature> it){
+	/**
+	 * To make sure that if there is a feature named 'key', it comes first
+	 */
+	def orderByKeyValue(EClassifier eClassifier){
+		val it = eClassifier as EClass 
+		var orderByKeyValue = new ArrayList<EStructuralFeature>()
+		orderByKeyValue.addAll(prefixFeatures.filter[eStructuralFeature| eStructuralFeature.name.equals('key')]);
+		orderByKeyValue.addAll(prefixFeatures.filter[eStructuralFeature|!eStructuralFeature.name.equals('key')]);
+		orderByKeyValue
+	}
+	
+	
+	
+	
 	def rule(EClassifier it) {
 		switch(it) {
 			EClass :
@@ -130,7 +236,7 @@ class Ecore2XtextJSONGrammarCreator {
 					«IF (it.onlyOptionalFeatures)»
 						{«fqn»}
 					«ENDIF»
-					«FOR strF: it.prefixFeatures»
+					«FOR strF: it.orderByKeyValue /*it.prefixFeatures*/»  
 						«strF.assigment»
 					«ENDFOR»
 					«openParenthesis»
@@ -164,7 +270,7 @@ class Ecore2XtextJSONGrammarCreator {
 	
 	def static String jsonDataTypeRuleBody(EDataType it) {
 		switch (name) {
-			case 'EString': 'STRING'
+			case 'EString': 'VALID_STRING'
 			case 'EDouble': 'E_INT | E_DOUBLE'
 			case 'EInt': 'E_INT'
 			default : it.dataTypeRuleBody
@@ -198,6 +304,7 @@ class Ecore2XtextJSONGrammarCreator {
 		//	""
 		//else
 		if (it.isKeyword) {
+			this.keywords.add(it.name);
 			''' 
 				//Keywords
 				'"«it.name»"' «jsonSeparator»
@@ -296,6 +403,13 @@ class Ecore2XtextJSONGrammarCreator {
 		'''
 	} 	 
 	
+	def writeVALID_STRING(){
+		'''
+		VALID_STRING: STRING  | KEYWORD;
+		
+		'''
+	}
+	
 	def overwriteSTRING(){
 		'''
 		/**
@@ -316,6 +430,19 @@ class Ecore2XtextJSONGrammarCreator {
 		
 		'''
 	}
+	
+	def writeKeywords(){
+		if(!this.keywords.isEmpty()){
+			'''
+			KEYWORD: «FOR it: this.keywords SEPARATOR ' | '» 
+							'"«it»"' 
+						«ENDFOR»
+			;
+			
+			'''
+		}else{''}
+	}
+	
 	def writeTerminalE_DOUBLE(){
 		'''
 		terminal E_DOUBLE :
