@@ -70,6 +70,7 @@ public class CreateLanguageHandler extends AbstractHandler{
 
 	public final static String GEN_MODEL_XML_ENCODING = "UTF-8";
 	public final static String GEN_MODEL_DIR = "src-gen";
+	public final String JSON_METASCHEMA_MM_NS_URI = "http://at.jku.bise/jsonMetaschemaMM";
 	
 	
 	@Override
@@ -259,13 +260,14 @@ public class CreateLanguageHandler extends AbstractHandler{
 		Map<EObject,java.util.Collection<EStructuralFeature.Setting>> externalCrossReferences =externalCrossReferencer.findExternalCrossReferences();
 		if(!externalCrossReferences.isEmpty()) {
 			boolean isJsonMetaschemaPresent=false;
-			String jsonMetaschemaMMNsURIString =jsonMetaschemaMM.JsonMetaschemaMMPackage.eINSTANCE.getNsURI();
+//			String jsonMetaschemaMMNsURIString =jsonMetaschemaMM.JsonMetaschemaMMPackage.eINSTANCE.getNsURI();
 			for (Map.Entry<EObject, Collection<EStructuralFeature.Setting>> entry : externalCrossReferences.entrySet()) {
 				 EObject eObject = entry.getKey();
 				 EObject rootEObject = EcoreUtil.getRootContainer(eObject);
 				 if (rootEObject instanceof EPackage) {
 					 EPackage externalEPackage = (EPackage)rootEObject;
-					 if(externalEPackage.getNsURI().equals(jsonMetaschemaMMNsURIString)) {
+//					 if(externalEPackage.getNsURI().equals(jsonMetaschemaMMNsURIString)) {
+					 if(externalEPackage.getNsURI().equals(JSON_METASCHEMA_MM_NS_URI)) {
 						 isJsonMetaschemaPresent=true;
 						 break;
 					 }

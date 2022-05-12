@@ -5,11 +5,11 @@
   <parent>
     <groupId>at.jku.bise.ecore.json.grammar.project</groupId>
     <artifactId>at.jku.bise.ecore.json.grammar.project.releng</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>2.0.0</version>
     <relativePath>..\pom.xml</relativePath>
   </parent>
   <artifactId>at.jku.bise.ecore.json.grammar.update.eclipse-repository</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>2.0.0</version>
   <packaging>eclipse-repository</packaging>
   <name>[updatesite] at.jku.bise.ecore.json.grammar.update.eclipse-repository</name>
 </project>
