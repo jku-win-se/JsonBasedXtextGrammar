@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
  *   <li>{@link jsongrammar.DetailedGrammar#getKeyValue <em>Key Value</em>}</li>
  *   <li>{@link jsongrammar.DetailedGrammar#getCurlyBracesEClass <em>Curly Braces EClass</em>}</li>
  *   <li>{@link jsongrammar.DetailedGrammar#getBracketsEClass <em>Brackets EClass</em>}</li>
+ *   <li>{@link jsongrammar.DetailedGrammar#getRootEClass <em>Root EClass</em>}</li>
  * </ul>
  *
  * @see jsongrammar.JsongrammarPackage#getDetailedGrammar()
@@ -103,5 +104,27 @@ public interface DetailedGrammar extends EObject {
 	 * @generated
 	 */
 	EList<EClass> getBracketsEClass();
+
+	/**
+	 * Returns the value of the '<em><b>Root EClass</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Root EClass</em>' reference.
+	 * @see #setRootEClass(EClass)
+	 * @see jsongrammar.JsongrammarPackage#getDetailedGrammar_RootEClass()
+	 * @model required="true"
+	 * @generated
+	 */
+	EClass getRootEClass();
+
+	/**
+	 * Sets the value of the '{@link jsongrammar.DetailedGrammar#getRootEClass <em>Root EClass</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Root EClass</em>' reference.
+	 * @see #getRootEClass()
+	 * @generated
+	 */
+	void setRootEClass(EClass value);
 
 } // DetailedGrammar

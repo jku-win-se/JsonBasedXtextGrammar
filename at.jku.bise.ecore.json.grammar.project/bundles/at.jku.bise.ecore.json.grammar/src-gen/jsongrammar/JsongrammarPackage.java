@@ -121,13 +121,22 @@ public interface JsongrammarPackage extends EPackage {
 	int DETAILED_GRAMMAR__BRACKETS_ECLASS = 5;
 
 	/**
+	 * The feature id for the '<em><b>Root EClass</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DETAILED_GRAMMAR__ROOT_ECLASS = 6;
+
+	/**
 	 * The number of structural features of the '<em>Detailed Grammar</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DETAILED_GRAMMAR_FEATURE_COUNT = 6;
+	int DETAILED_GRAMMAR_FEATURE_COUNT = 7;
 
 	/**
 	 * The number of operations of the '<em>Detailed Grammar</em>' class.
@@ -262,6 +271,17 @@ public interface JsongrammarPackage extends EPackage {
 	EReference getDetailedGrammar_BracketsEClass();
 
 	/**
+	 * Returns the meta object for the reference '{@link jsongrammar.DetailedGrammar#getRootEClass <em>Root EClass</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Root EClass</em>'.
+	 * @see jsongrammar.DetailedGrammar#getRootEClass()
+	 * @see #getDetailedGrammar()
+	 * @generated
+	 */
+	EReference getDetailedGrammar_RootEClass();
+
+	/**
 	 * Returns the meta object for class '{@link jsongrammar.JsonGrammar <em>Json Grammar</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -373,6 +393,14 @@ public interface JsongrammarPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DETAILED_GRAMMAR__BRACKETS_ECLASS = eINSTANCE.getDetailedGrammar_BracketsEClass();
+
+		/**
+		 * The meta object literal for the '<em><b>Root EClass</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DETAILED_GRAMMAR__ROOT_ECLASS = eINSTANCE.getDetailedGrammar_RootEClass();
 
 		/**
 		 * The meta object literal for the '{@link jsongrammar.impl.JsonGrammarImpl <em>Json Grammar</em>}' class.

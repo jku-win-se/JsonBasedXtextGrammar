@@ -164,6 +164,15 @@ public class JsongrammarPackageImpl extends EPackageImpl implements JsongrammarP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getDetailedGrammar_RootEClass() {
+		return (EReference)detailedGrammarEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getJsonGrammar() {
 		return jsonGrammarEClass;
 	}
@@ -221,6 +230,7 @@ public class JsongrammarPackageImpl extends EPackageImpl implements JsongrammarP
 		createEReference(detailedGrammarEClass, DETAILED_GRAMMAR__KEY_VALUE);
 		createEReference(detailedGrammarEClass, DETAILED_GRAMMAR__CURLY_BRACES_ECLASS);
 		createEReference(detailedGrammarEClass, DETAILED_GRAMMAR__BRACKETS_ECLASS);
+		createEReference(detailedGrammarEClass, DETAILED_GRAMMAR__ROOT_ECLASS);
 
 		jsonGrammarEClass = createEClass(JSON_GRAMMAR);
 		createEReference(jsonGrammarEClass, JSON_GRAMMAR__DETAILED_GRAMMAR);
@@ -264,6 +274,7 @@ public class JsongrammarPackageImpl extends EPackageImpl implements JsongrammarP
 		initEReference(getDetailedGrammar_KeyValue(), ecorePackage.getEAttribute(), null, "keyValue", null, 0, -1, DetailedGrammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDetailedGrammar_CurlyBracesEClass(), ecorePackage.getEClass(), null, "curlyBracesEClass", null, 0, -1, DetailedGrammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDetailedGrammar_BracketsEClass(), ecorePackage.getEClass(), null, "bracketsEClass", null, 0, -1, DetailedGrammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDetailedGrammar_RootEClass(), ecorePackage.getEClass(), null, "rootEClass", null, 1, 1, DetailedGrammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(jsonGrammarEClass, JsonGrammar.class, "JsonGrammar", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getJsonGrammar_DetailedGrammar(), this.getDetailedGrammar(), null, "detailedGrammar", null, 1, 1, JsonGrammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

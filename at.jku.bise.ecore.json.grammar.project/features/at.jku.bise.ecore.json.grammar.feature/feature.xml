@@ -2,7 +2,7 @@
 <feature
       id="at.jku.bise.ecore.json.grammar.feature"
       label="JsonGrammar"
-      version="1.0.1.qualifier">
+      version="2.0.0">
 
    <description url="http://www.example.com/description">
       [Enter Feature Description here.]

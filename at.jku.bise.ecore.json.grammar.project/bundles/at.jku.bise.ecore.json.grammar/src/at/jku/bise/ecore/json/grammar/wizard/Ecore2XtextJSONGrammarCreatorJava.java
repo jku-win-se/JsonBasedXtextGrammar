@@ -1,6 +1,7 @@
 package at.jku.bise.ecore.json.grammar.wizard;
 
-import at.jku.bise.ecore.json.grammar.ui.utils.Ecore2XtextJSONExtensions;
+
+import at.jku.bise.ecore.json.grammar.ui.utils.Ecore2XtextJSONExtensions_old;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.ArrayList;
@@ -235,7 +236,7 @@ public class Ecore2XtextJSONGrammarCreatorJava {
     boolean _matched = false;
     if (it instanceof EAttribute) {
       _matched=true;
-      _switchResult = Ecore2XtextJSONExtensions.assignedJSONRuleCall(((EAttribute)it));
+      _switchResult = Ecore2XtextJSONExtensions_old.assignedJSONRuleCall(((EAttribute)it));
     }
     if (!_matched) {
       if (it instanceof EReference) {
