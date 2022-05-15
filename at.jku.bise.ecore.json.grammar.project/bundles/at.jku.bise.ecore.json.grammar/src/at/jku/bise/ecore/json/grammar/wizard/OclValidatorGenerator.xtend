@@ -16,18 +16,18 @@ class OclValidatorGenerator {
 	
 	def private static String  generate (String classPackage, String className, String modelPackage, String oclPath){
 		'''
-		package «classPackage»;
+		package Â«classPackageÂ»;
 		
 		import org.eclipse.emf.common.util.URI;
 		import org.eclipse.ocl.xtext.completeocl.validation.CompleteOCLEObjectValidator;
 		import org.eclipse.xtext.validation.EValidatorRegistrar;
 		
-		public class «className» extends Abstract«className» {
+		public class Â«classNameÂ» extends AbstractÂ«classNameÂ» {
 			
 			public void register(EValidatorRegistrar registrar) {
 				super.register(registrar); 
-				«modelPackage» ePackage = «modelPackage».eINSTANCE;
-				URI basicOclURI = URI.createPlatformPluginURI("«oclPath»", true);
+				Â«modelPackageÂ» ePackage = Â«modelPackageÂ».eINSTANCE;
+				URI basicOclURI = URI.createPlatformPluginURI("Â«oclPathÂ»", true);
 				registrar.register(ePackage, new CompleteOCLEObjectValidator(ePackage, basicOclURI));
 			}
 		}
